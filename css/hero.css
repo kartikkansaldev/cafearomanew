@@ -37,7 +37,7 @@ body {
 /* The huge "Café Aroma" brush-script title */
 .hero-title {
   font-family: 'Yellowtail', cursive; /* thick brush script font */
-  font-size: clamp(96px, 20vw, 260px); /* clamp(min, ideal, max): scales with screen */
+  font-size: clamp(96px, 16vw, 240px); /* clamp(min, ideal, max): scales with screen */
   line-height: 0.9;                    /* tighter line spacing for large text */
   color: #111;                         /* near-black */
   text-align: center;                  /* centred */
@@ -45,11 +45,29 @@ body {
   text-shadow: 4px 4px 6px rgba(0,0,0,0.25); /* soft shadow to pop from 3D */
   position: relative;                  /* needed so z-index works */
   z-index: 1;                          /* layer 1: sits BEHIND the 3D canvas */
+  
+  /* Flex layout to split Café and Aroma horizontally to frame the cup */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(110px, 16vw, 210px); /* tighter space in the middle to bring words close to the cup */
+  width: 100%;
 }
 
-/* Makes each word of the title appear on its own line */
+/* Makes each word of the title appear side-by-side */
 .t-line {
-  display: block; /* block elements always start on a new line */
+  display: inline-block; /* allows horizontal alignment within flex layout */
+  transition: transform 0.3s ease;
+}
+
+/* Café (left) - shifted UP and rotated slightly to frame the cup closely */
+.t-line:first-child {
+  transform: translateY(-95px) translateX(95px) rotate(-3deg);
+}
+
+/* Aroma (right) - shifted DOWN and rotated slightly to frame the cup closely */
+.t-line:last-child {
+  transform: translateY(95px) translateX(25px) rotate(1deg);
 }
 
 /* The small subtitle under the title */
@@ -58,9 +76,13 @@ body {
   font-size: 10px;                      /* very small text */
   letter-spacing: 0.28em;               /* very wide letter spacing */
   color: #111;
-  margin-top: 6px;    /* tiny gap above */
-  position: relative; /* needed so z-index works */
-  z-index: 1;         /* layer 1: behind the 3D canvas */
+  position: absolute;
+  bottom: 120px;       /* brought down below the cup, above the scroll arrow */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;         /* in front of 3D canvas for visibility */
+  text-align: center;
+  white-space: nowrap;
 }
 
 /* ── FLOATING MENU BUTTON (bottom-right corner of hero) ── */
@@ -166,9 +188,10 @@ body {
 @media (max-width: 768px) {
   /* Move title UP so it sits nicely below the navbar */
   .hero-title {
-    font-size: 70px;
+    font-size: clamp(48px, 12vw, 70px);
     margin-top: 40px; 
     z-index: 10; /* Put the text ON TOP just in case it overlaps the cup */
+    gap: clamp(30px, 8vw, 60px);
   }
   
   .hero-sub {
@@ -176,8 +199,20 @@ body {
     letter-spacing: 0.2em;
     max-width: 90%;
     text-align: center;
-    margin: 10px auto 0;
+    position: absolute;
+    bottom: 95px; /* adjusted to sit nicely on mobile screens */
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 10;
+    margin: 0;
+  }
+
+  /* Staggered transformations for title lines on mobile */
+  .t-line:first-child {
+    transform: translateY(-40px) translateX(45px) rotate(-3deg);
+  }
+  .t-line:last-child {
+    transform: translateY(40px) translateX(25px) rotate(1deg);
   }
   
   /* Push the 3D canvas DOWN into the bottom half of the screen */
