@@ -143,6 +143,15 @@
 
 /* ── RESPONSIVE DESIGN (Syllabus: Media Queries) ── */
 @media (max-width: 768px) {
+  .locations {
+    height: auto;
+  }
+  
+  .locations-photos {
+    height: 300px;
+    flex: none;
+  }
+
   .locations-bottom {
     flex-direction: column;
     gap: 24px;

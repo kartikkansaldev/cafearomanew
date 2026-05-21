@@ -165,7 +165,12 @@
 /* ── RESPONSIVE DESIGN (Syllabus: Media Queries) ── */
 @media (max-width: 768px) {
   .site-footer {
-    padding: 40px 20px;
+    padding: 40px 20px 90px 20px; /* added bottom padding to clear the fixed ticker */
+  }
+
+  .footer-text {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   .footer-top {

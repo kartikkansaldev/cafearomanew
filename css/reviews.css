@@ -154,3 +154,43 @@
   color: rgba(0,0,0,0.5); /* semi-transparent for a lighter look */
   letter-spacing: 0.1em;
 }
+
+/* ── RESPONSIVE DESIGN (Syllabus: Media Queries) ── */
+@media (max-width: 768px) {
+  .reviews {
+    padding: 80px 20px 100px 20px; /* reduced horizontal padding, bottom room for ticker */
+  }
+
+  .reviews-header {
+    margin-bottom: 40px;
+  }
+
+  .reviews-title {
+    font-size: clamp(40px, 10vw, 60px);
+  }
+
+  .reviews-grid {
+    gap: 20px;
+  }
+
+  .review-card {
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    padding: 30px 20px;
+  }
+
+  /* Reset staggered vertical translation */
+  .review-card:nth-child(2) {
+    transform: none;
+  }
+
+  /* Adjust hover animations on mobile touch screens */
+  .review-card:hover {
+    transform: translateY(-5px) scale(1.01);
+  }
+  .review-card:nth-child(2):hover {
+    transform: translateY(-5px) scale(1.01);
+  }
+}
+

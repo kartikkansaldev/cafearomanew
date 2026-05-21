@@ -5,6 +5,11 @@
    ============================================================ */
 
 /* The page background colour — burnt orange/terracotta */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 body {
   background-color: #9f4920; /* deep terracotta orange */
   min-height: 100vh;          /* at least full screen tall */
@@ -189,9 +194,11 @@ body {
   /* Move title UP so it sits nicely below the navbar */
   .hero-title {
     font-size: clamp(48px, 12vw, 70px);
-    margin-top: 40px; 
+    margin-top: 60px; 
     z-index: 10; /* Put the text ON TOP just in case it overlaps the cup */
-    gap: clamp(30px, 8vw, 60px);
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
   }
   
   .hero-sub {
@@ -209,15 +216,15 @@ body {
 
   /* Staggered transformations for title lines on mobile */
   .t-line:first-child {
-    transform: translateY(-40px) translateX(45px) rotate(-3deg);
+    transform: translateY(-10px) rotate(-3deg);
   }
   .t-line:last-child {
-    transform: translateY(40px) translateX(25px) rotate(1deg);
+    transform: translateY(10px) rotate(1deg);
   }
   
   /* Push the 3D canvas DOWN into the bottom half of the screen */
   #canvas3d {
-    width: 100vw;
+    width: 100%;
     height: 60vh;
     top: auto;          /* Remove top anchoring */
     bottom: 90px;       /* Anchor it above the ticker and menu button */
