@@ -42,22 +42,22 @@ nav.nav-hidden {
 /* Style for every navigation link (HOME, MENU, REWARDS, etc.) */
 .pill {
   background-color: transparent; /* no background */
-  color: #111;                   /* dark text */
+  color: #000;                   /* absolute black text */
   font-family: 'Space Mono', monospace; /* typewriter font */
-  font-size: 11px;               /* small text */
+  font-size: 13px;               /* increased from 11px */
   font-weight: 700;              /* bold */
-  letter-spacing: 0.25em;        /* extra spacing between letters */
-  padding: 10px 16px;            /* inside spacing (top/bottom, left/right) */
+  letter-spacing: 0.2em;        /* slightly tighter for a more solid look */
+  padding: 8px 16px;            /* inside spacing */
   text-decoration: none;         /* removes underline from link */
-  transition: color 0.2s, opacity 0.2s, transform 0.2s; /* smooth hover animation */
-  opacity: 1;                    /* fully visible/dark text */
+  border-bottom: 2px solid transparent; /* transparent border to prevent layout shifts */
+  transition: all 0.2s ease;     /* smooth transition for all properties */
 }
 
 /* When mouse hovers over any pill link */
 .pill:hover {
-  opacity: 1;    /* fully visible */
-  color: #111;   /* same dark color */
+  color: #000;   /* absolute black color */
   transform: translateY(-2px); /* slight lift on hover to show interaction */
+  border-bottom: 2px solid #000; /* bold underline effect on hover */
 }
 
 /* ── HAMBURGER MENU BUTTON ── */
