@@ -174,7 +174,7 @@
   }
 
   .review-card {
-    min-width: 0;
+    flex: none;
     width: 100%;
     max-width: 100%;
     padding: 30px 20px;
