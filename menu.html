@@ -11,7 +11,8 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Yellowtail&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Yellowtail&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet" />
 
   <!--
     CSS FILES — one per section (easy to find and study!)
@@ -30,10 +31,10 @@
 
 <body>
 
-  
+
   <nav>
     <a class="pill mobile-home-btn" href="index.html">H O M E</a>
-    
+
     <div class="nav-center" id="mobile-menu">
       <a class="pill hamburger-only" href="index.html">H O M E</a>
       <a class="pill" href="#">M E N U</a>
@@ -41,9 +42,10 @@
       <a class="pill" href="index.html#locations">L O C A T I O N</a>
       <a class="pill hamburger-only" href="cart.html">C A R T</a>
     </div>
-    
+
     <a class="pill desktop-cart" href="cart.html">C A R T</a>
-    <button class="hamburger-btn" onclick="document.getElementById('mobile-menu').classList.toggle('menu-open')">☰</button>
+    <button class="hamburger-btn"
+      onclick="document.getElementById('mobile-menu').classList.toggle('menu-open')">☰</button>
   </nav>
 
   <!-- TAB CONTROLS (JAVASCRIPT) -->
@@ -71,7 +73,7 @@
 
           <div class="featured-drinks-section">
             <p class="featured-drinks-title" style="margin-top: -20px;">H O T &nbsp; C O F F E E S</p>
-            
+
             <div class="featured-grid" id="hot-coffee-grid">
               <!-- JS will dynamically inject product cards here! -->
             </div>
@@ -101,7 +103,8 @@
             <div class="featured-grid">
 
               <div class="featured-card" data-id="feat-1">
-                <button class="heart-btn" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;">♡</button>
+                <button class="heart-btn"
+                  style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;">♡</button>
                 <img class="featured-card-img" src="assets/drinks/mango_cold_brew_1779306848768.png"
                   alt="Mango Cold Brew">
                 <div class="featured-card-body">
@@ -111,13 +114,15 @@
                     chilli. Dangerously refreshing.</p>
                   <div class="featured-card-footer">
                     <span class="featured-card-price">&#8377; 340</span>
-                    <button class="featured-card-btn add-to-cart-btn" data-id="feat-1" data-name="Mango Cold Brew" data-price="340">A D D</button>
+                    <button class="featured-card-btn add-to-cart-btn" data-id="feat-1" data-name="Mango Cold Brew"
+                      data-price="340">A D D</button>
                   </div>
                 </div>
               </div>
 
               <div class="featured-card" data-id="feat-2">
-                <button class="heart-btn" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;">♡</button>
+                <button class="heart-btn"
+                  style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;">♡</button>
                 <img class="featured-card-img" src="assets/drinks/lavender_latte_1779307028256.png"
                   alt="Lavender Latte">
                 <div class="featured-card-body">
@@ -127,7 +132,8 @@
                     lavender buds on top.</p>
                   <div class="featured-card-footer">
                     <span class="featured-card-price">&#8377; 310</span>
-                    <button class="featured-card-btn add-to-cart-btn" data-id="feat-2" data-name="Lavender Latte" data-price="310">A D D</button>
+                    <button class="featured-card-btn add-to-cart-btn" data-id="feat-2" data-name="Lavender Latte"
+                      data-price="310">A D D</button>
                   </div>
                 </div>
               </div>
@@ -146,9 +152,10 @@
           <div class="shop-grid" style="padding: 0; overflow-x: auto; margin-top: 20px;">
 
             <div class="product-card" id="finding-french-vanilla" data-id="find-1" style="position:relative;">
-              <button class="heart-btn" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;">♡</button>
+              <button class="heart-btn"
+                style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;">♡</button>
               <div class="product-img-wrap">
-                
+
                 <img src="now_make_different_flavour_of_202605201454.jpeg" alt="French Vanilla Ground Coffee" />
               </div>
               <div class="product-info">
@@ -166,14 +173,16 @@
                       <button class="qty-btn" onclick="changeQty(this,1)">+</button>
                     </div>
                     <div class="qty-divider"></div>
-                    <button class="add-btn-text add-to-cart-btn" data-id="find-1" data-name="French Vanilla" data-price="1499">A D D</button>
+                    <button class="add-btn-text add-to-cart-btn" data-id="find-1" data-name="French Vanilla"
+                      data-price="1499">A D D</button>
                   </div>
                 </div>
               </div>
             </div>
 
             <div class="product-card" id="finding-hazelnut-vanilla" data-id="find-2" style="position:relative;">
-              <button class="heart-btn" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;">♡</button>
+              <button class="heart-btn"
+                style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;">♡</button>
               <div class="product-img-wrap">
                 <img src="now_make_different_flavour_of_202605201438.jpeg" alt="Hazelnut Vanilla Ground Coffee" />
               </div>
@@ -192,14 +201,16 @@
                       <button class="qty-btn" onclick="changeQty(this,1)">+</button>
                     </div>
                     <div class="qty-divider"></div>
-                    <button class="add-btn-text add-to-cart-btn" data-id="find-2" data-name="Hazelnut Vanilla" data-price="1499">A D D</button>
+                    <button class="add-btn-text add-to-cart-btn" data-id="find-2" data-name="Hazelnut Vanilla"
+                      data-price="1499">A D D</button>
                   </div>
                 </div>
               </div>
             </div>
 
             <div class="product-card" id="finding-hazelnut-roast" data-id="find-3" style="position:relative;">
-              <button class="heart-btn" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;">♡</button>
+              <button class="heart-btn"
+                style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;">♡</button>
               <div class="product-img-wrap">
                 <img src="now_make_different_flavour_of_202605201454(1).jpeg" alt="Hazelnut Roast Ground Coffee" />
               </div>
@@ -218,14 +229,16 @@
                       <button class="qty-btn" onclick="changeQty(this,1)">+</button>
                     </div>
                     <div class="qty-divider"></div>
-                    <button class="add-btn-text add-to-cart-btn" data-id="find-3" data-name="Hazelnut Roast" data-price="1649">A D D</button>
+                    <button class="add-btn-text add-to-cart-btn" data-id="find-3" data-name="Hazelnut Roast"
+                      data-price="1649">A D D</button>
                   </div>
                 </div>
               </div>
             </div>
 
             <div class="product-card" id="finding-original-roast" data-id="find-4" style="position:relative;">
-              <button class="heart-btn" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;">♡</button>
+              <button class="heart-btn"
+                style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;">♡</button>
               <div class="product-img-wrap">
                 <img src="don't_add_background_2K_202605201454.jpeg" alt="Original Roast Ground Coffee" />
               </div>
@@ -244,7 +257,8 @@
                       <button class="qty-btn" onclick="changeQty(this,1)">+</button>
                     </div>
                     <div class="qty-divider"></div>
-                    <button class="add-btn-text add-to-cart-btn" data-id="find-4" data-name="Original Roast" data-price="1499">A D D</button>
+                    <button class="add-btn-text add-to-cart-btn" data-id="find-4" data-name="Original Roast"
+                      data-price="1499">A D D</button>
                   </div>
                 </div>
               </div>
