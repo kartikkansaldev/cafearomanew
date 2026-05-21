@@ -8,15 +8,22 @@
 // 1. Arrays & Objects with Local Storage (Syllabus L19-22)
 // We read from localStorage first. If nothing is there, we use an empty array.
 let shoppingCart = JSON.parse(localStorage.getItem('cafeCart')) || [];
-let orderHistory = JSON.parse(localStorage.getItem('cafeHistory')) || [];
+
+// Quick migration for old image URLs
+shoppingCart.forEach(item => {
+  if (item.img && item.img.includes('now_make_different_flavour_of_202605201454.jpeg')) item.img = 'french-vanilla.jpeg';
+  else if (item.img && item.img.includes('now_make_different_flavour_of_202605201438.jpeg')) item.img = 'hazelnut-vanilla.jpeg';
+  else if (item.img && item.img.includes('now_make_different_flavour_of_202605201454(1).jpeg')) item.img = 'hazelnut-roast.jpeg';
+  else if (item.img && item.img.includes('don\'t_add_background_2K_202605201454.jpeg')) item.img = 'original-roast.jpeg';
+});
 
 // Save function to update localStorage whenever the cart changes
 function saveCart() {
   localStorage.setItem('cafeCart', JSON.stringify(shoppingCart));
 }
-function saveHistory() {
-  localStorage.setItem('cafeHistory', JSON.stringify(orderHistory));
-}
+
+// Ensure migration is saved
+saveCart();
 
 // 2. Select the Cart link in the Navbar
 const cartNavBtns = document.querySelectorAll('nav a.pill');
@@ -83,41 +90,7 @@ function updateCartUI() {
   });
 }
 
-// 5. Render "PREVIOUS" Tab (if we are on menu.html)
-function renderPreviousOrders() {
-  const previousGrid = document.getElementById('previous-grid');
-  if (!previousGrid) return;
-  
-  if (orderHistory.length === 0) {
-    previousGrid.innerHTML = '<p style="color:#fff; grid-column: 1/-1;">You have no past orders yet.</p>';
-    return;
-  }
-  
-  const historyHTML = orderHistory.map(order => {
-    return `
-      <div class="featured-card">
-        <img class="featured-card-img" src="${order.img}" alt="${order.name}">
-        <div class="featured-card-body">
-          <p class="featured-card-tag" style="color: #d4e9c4;">✓ PURCHASED (${order.quantity}x)</p>
-          <h3 class="featured-card-title">${order.name}</h3>
-          <p class="featured-card-desc">You previously ordered this item. Click below to quickly add it again!</p>
-          <div class="featured-card-footer">
-            <span class="featured-card-price">₹${order.price}</span>
-            <button class="featured-card-btn add-to-cart-btn" style="background: #d4e9c4; color: #2c3d1a;" 
-                    data-id="${order.id}" data-name="${order.name}" data-price="${order.price}">
-              R E O R D E R
-            </button>
-          </div>
-        </div>
-      </div>
-    `;
-  }).join('');
-  
-  previousGrid.innerHTML = historyHTML;
-}
-
-// Call this immediately to render history on page load
-renderPreviousOrders();
+// Previous orders logic has been moved to previous-orders.js
 
 // 6. Global Quantity Function for Our Finding Panel
 window.changeQty = function(btn, delta) {
@@ -180,16 +153,21 @@ if (cartPageContainer) {
   if (checkoutBtn) {
     checkoutBtn.addEventListener('click', () => {
       if (shoppingCart.length === 0) {
-        alert("Your cart is empty!");
+        alert("Your cart is empty.");
         return;
       }
       
       const total = shoppingCart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-      alert(`Checkout Successful!\nYou have purchased ${shoppingCart.length} items for a total of ₹${total}.\nEnjoy your Cafe Aroma coffee!`);
+      alert("Order placed! Thank you.");
       
-      // Save to history
-      orderHistory.push(...shoppingCart);
-      saveHistory();
+      // Save to previousOrders
+      let previousOrders = JSON.parse(localStorage.getItem('previousOrders')) || [];
+      previousOrders.push({
+        timestamp: new Date().toISOString(),
+        total: total,
+        items: [...shoppingCart]
+      });
+      localStorage.setItem('previousOrders', JSON.stringify(previousOrders));
       
       // Empty cart
       shoppingCart = [];

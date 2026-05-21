@@ -5,7 +5,11 @@
    ===================================================== */
 
 // 1. Array to hold the IDs of favorited drinks
-let favoritesList = [];
+let favoritesList = JSON.parse(localStorage.getItem('cafeFavorites')) || [];
+
+function saveFavorites() {
+  localStorage.setItem('cafeFavorites', JSON.stringify(favoritesList));
+}
 
 // 2. Event Delegation for the Heart Buttons (L27-30)
 // Just like the 'ADD' button, the hearts are dynamically created.
@@ -39,6 +43,7 @@ document.addEventListener('click', function(event) {
       event.target.style.color = '#fff'; // White
     }
     
+    saveFavorites();
     // Update the Favourites tab!
     renderFavorites();
   }
@@ -63,7 +68,7 @@ function renderFavorites() {
     return `
       <div class="featured-card">
         <!-- We output the heart as filled because we know it's a favorite -->
-        <button class="heart-btn" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: #ff4b4b; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;">♥</button>
+        <button aria-label="Add to favourites" class="heart-btn" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: #ff4b4b; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;">♥</button>
         <img class="featured-card-img" src="${fullData.img}" alt="${fullData.name}">
         <div class="featured-card-body">
           <p class="featured-card-tag" style="color: #d4e9c4;">&#9829; YOUR FAVORITE</p>

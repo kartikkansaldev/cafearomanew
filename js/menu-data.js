@@ -80,7 +80,7 @@ const coffeeData = [
     tag: '12 OZ POUCH',
     desc: 'Signature blend ground coffee pouch.',
     price: 1499,
-    img: 'now_make_different_flavour_of_202605201454.jpeg'
+    img: 'french-vanilla.jpeg'
   },
   {
     id: 'find-2',
@@ -89,7 +89,7 @@ const coffeeData = [
     tag: '12 OZ POUCH',
     desc: 'Signature blend ground coffee pouch.',
     price: 1499,
-    img: 'now_make_different_flavour_of_202605201438.jpeg'
+    img: 'hazelnut-vanilla.jpeg'
   },
   {
     id: 'find-3',
@@ -98,7 +98,7 @@ const coffeeData = [
     tag: '12 OZ POUCH',
     desc: 'Signature blend ground coffee pouch.',
     price: 1649,
-    img: 'now_make_different_flavour_of_202605201454(1).jpeg'
+    img: 'hazelnut-roast.jpeg'
   },
   {
     id: 'find-4',
@@ -107,7 +107,7 @@ const coffeeData = [
     tag: '12 OZ POUCH',
     desc: 'Signature blend ground coffee pouch.',
     price: 1499,
-    img: "don't_add_background_2K_202605201454.jpeg"
+    img: 'original-roast.jpeg'
   }
 ];
 
@@ -123,11 +123,16 @@ const coldCoffees = coffeeData.filter(drink => drink.category === 'cold');
 // 4. Create Node Function (Syllabus L23-26)
 // This function takes a single drink object and returns a piece of HTML
 function createCardHTML(drink) {
+  const currentFavorites = JSON.parse(localStorage.getItem('cafeFavorites')) || [];
+  const isFav = currentFavorites.includes(drink.id);
+  const heartText = isFav ? '♥' : '♡';
+  const heartColor = isFav ? '#ff4b4b' : '#fff';
+
   // We use Template Literals (``) from ES6 to easily inject variables into HTML strings
   return `
     <div class="featured-card" data-id="${drink.id}">
       <!-- HEART ICON FOR FAVORITES (We will select this in favorites.js) -->
-      <button class="heart-btn" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;">♡</button>
+      <button aria-label="Add to favourites" class="heart-btn" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: ${heartColor}; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;">${heartText}</button>
       
       <img class="featured-card-img" src="${drink.img}" alt="${drink.name}">
       <div class="featured-card-body">

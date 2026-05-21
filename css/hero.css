@@ -170,7 +170,7 @@ body {
 /* The moving inner container (like a conveyor belt) */
 .ticker-track {
   display: flex;                              /* side-by-side text segments */
-  animation: ticker-scroll 38s linear infinite; /* scroll continuously */
+  animation: ticker-scroll 30s linear infinite; /* scroll continuously */
 }
 
 /* Each repeated chunk of text in the ticker */
@@ -190,16 +190,15 @@ body {
 }
 
 /* ── RESPONSIVE DESIGN (Syllabus: Media Queries) ── */
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   /* Move title UP so it sits nicely below the navbar */
   .hero-title {
-    font-size: clamp(48px, 10vw, 80px);
+    font-size: clamp(48px, 12vw, 70px);
     margin-top: 60px; 
     z-index: 10; /* Put the text ON TOP just in case it overlaps the cup */
     flex-direction: column;
     gap: 10px;
     width: 100%;
-    order: 1; /* visual order: title first */
   }
   
   .hero-sub {
@@ -208,14 +207,14 @@ body {
     max-width: 90%;
     text-align: center;
     position: absolute;
-    bottom: 80px; /* adjusted to sit nicely on mobile/tablet screens */
+    bottom: 95px; /* adjusted to sit nicely on mobile screens */
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
     margin: 0;
   }
 
-  /* Staggered transformations for title lines on mobile/tablets */
+  /* Staggered transformations for title lines on mobile */
   .t-line:first-child {
     transform: translateY(-10px) rotate(-3deg);
   }
@@ -223,26 +222,19 @@ body {
     transform: translateY(10px) rotate(1deg);
   }
   
-  /* Place 3D canvas naturally below the title */
+  /* Push the 3D canvas DOWN into the bottom half of the screen */
   #canvas3d {
-    position: relative;
-    top: auto;
-    bottom: auto;
-    left: auto;
-    right: auto;
     width: 100%;
-    height: 40vh;
-    margin-top: 10px;
-    z-index: 5;
-    order: 2; /* visual order: cup second */
+    height: 60vh;
+    top: auto;          /* Remove top anchoring */
+    bottom: 90px;       /* Anchor it above the ticker and menu button */
   }
   
   /* Reposition the menu button below the cup */
   .hero-menu-btn {
-    bottom: 25px; /* pushed way down below the cup */
+    bottom: 30px; /* pushed way down below the cup */
     right: 50%;
     transform: translateX(50%); /* perfectly center it on mobile */
-    padding: 12px 24px;
   }
   
   /* Ensure hover transform plays nice with centered transform */

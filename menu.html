@@ -6,6 +6,8 @@
   <!-- Basic Meta Tags (Syllabus: Introduction to HTML) -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Explore our menu of specialty hot and cold coffees, featured seasonal drinks, and signature pouches." />
+  <meta name="theme-color" content="#1a1a1a" />
   <title>Café Aroma — Menu</title>
 
   <!-- Google Fonts -->
@@ -44,7 +46,7 @@
     </div>
 
     <a class="pill desktop-cart" href="cart.html">C A R T</a>
-    <button class="hamburger-btn"
+    <button class="hamburger-btn" aria-label="Toggle menu"
       onclick="document.getElementById('mobile-menu').classList.toggle('menu-open')">☰</button>
   </nav>
 
@@ -173,7 +175,7 @@
                 style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;">♡</button>
               <div class="product-img-wrap">
 
-                <img src="now_make_different_flavour_of_202605201454.jpeg" alt="French Vanilla Ground Coffee" />
+                <img src="french-vanilla.jpeg" alt="French Vanilla Ground Coffee" />
               </div>
               <div class="product-info">
                 <p class="product-name">French Vanilla</p>
@@ -201,7 +203,7 @@
               <button class="heart-btn"
                 style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;">♡</button>
               <div class="product-img-wrap">
-                <img src="now_make_different_flavour_of_202605201438.jpeg" alt="Hazelnut Vanilla Ground Coffee" />
+                <img src="hazelnut-vanilla.jpeg" alt="Hazelnut Vanilla Ground Coffee" />
               </div>
               <div class="product-info">
                 <p class="product-name">Hazelnut Vanilla</p>
@@ -229,7 +231,7 @@
               <button class="heart-btn"
                 style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;">♡</button>
               <div class="product-img-wrap">
-                <img src="now_make_different_flavour_of_202605201454(1).jpeg" alt="Hazelnut Roast Ground Coffee" />
+                <img src="hazelnut-roast.jpeg" alt="Hazelnut Roast Ground Coffee" />
               </div>
               <div class="product-info">
                 <p class="product-name">Hazelnut Roast</p>
@@ -257,7 +259,7 @@
               <button class="heart-btn"
                 style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;">♡</button>
               <div class="product-img-wrap">
-                <img src="don't_add_background_2K_202605201454.jpeg" alt="Original Roast Ground Coffee" />
+                <img src="original-roast.jpeg" alt="Original Roast Ground Coffee" />
               </div>
               <div class="product-info">
                 <p class="product-name">Original Roast</p>
@@ -333,6 +335,7 @@
 
   <!-- JAVASCRIPT IMPORTS (Syllabus: Connecting external scripts) -->
   <script src="js/menu-data.js"></script>
+  <script src="js/previous-orders.js"></script>
   <script src="js/tabs.js"></script>
   <script src="js/cart.js"></script>
   <script src="js/favorites.js"></script>
