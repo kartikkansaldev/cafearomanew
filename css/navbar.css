@@ -44,7 +44,7 @@ nav.nav-hidden {
   background-color: transparent; /* no background */
   color: #000;                   /* absolute black text */
   font-family: 'Space Mono', monospace; /* typewriter font */
-  font-size: 13px;               /* increased from 11px */
+  font-size: 16px;               /* increased from 13px */
   font-weight: 700;              /* bold */
   letter-spacing: 0.2em;        /* slightly tighter for a more solid look */
   padding: 8px 16px;            /* inside spacing */
