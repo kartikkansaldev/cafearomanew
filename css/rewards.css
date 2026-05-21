@@ -13,11 +13,7 @@ html, body {
   flex-direction: column;
 }
 
-/* Override nav pill hover for dark background */
-.pill:hover { color: #ffffff; }
-
-/* ── REWARDS HERO (Sage Green) ── 
-   Syllabus: Flexbox (L19-21) */
+/* ── REWARDS HERO (Sage Green) ── */
 .hero-rewards {
   padding: 160px 50px 100px 50px;
   background-color: #5a7a5a; /* Distinct Sage Green background */

@@ -92,12 +92,18 @@
       .checkout-row { flex-direction: column; gap: 20px; }
       .checkout-btn { width: 100%; }
     }
+
+    /* Compact cart footer */
+    .site-footer {
+      min-height: auto;
+      padding: 40px 40px;
+    }
   </style>
 </head>
 <body>
 
-  <nav style="background: transparent;">
-    <a class="pill mobile-home-btn" href="index.html" style="color: #111; border-color: #111;">H O M E</a>
+  <nav>
+    <a class="pill mobile-home-btn" href="index.html">H O M E</a>
     <div class="nav-center" id="mobile-menu">
       <a class="pill hamburger-only" href="index.html">H O M E</a>
       <a class="pill" href="menu.html">M E N U</a>
@@ -105,7 +111,7 @@
       <a class="pill" href="index.html#locations">L O C A T I O N</a>
       <a class="pill hamburger-only" href="cart.html">C A R T</a>
     </div>
-    <a class="pill desktop-cart" href="cart.html" style="color: #1e7a3c; border-color: #1e7a3c; background: transparent;">C A R T</a>
+    <a class="pill desktop-cart" href="cart.html">C A R T</a>
     <button class="hamburger-btn" onclick="document.getElementById('mobile-menu').classList.toggle('menu-open')">☰</button>
   </nav>
 

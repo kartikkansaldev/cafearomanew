@@ -90,3 +90,20 @@
     display: none;
   }
 }
+
+/* ── DARK BACKGROUND TAB SWITCHES ── */
+body.dark-bg .tab-btn {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+body.dark-bg .tab-btn:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+body.dark-bg .tab-btn.active {
+  color: #fff;
+  border-color: #fff;
+  background: transparent;
+}
+

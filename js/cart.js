@@ -77,10 +77,8 @@ function updateCartUI() {
   activeCartBtns.forEach(btn => {
     if (totalItems > 0) {
       btn.textContent = `C A R T (${totalItems})`;
-      btn.style.color = '#d4e9c4'; 
     } else {
       btn.textContent = 'C A R T';
-      btn.style.color = ''; 
     }
   });
 }
@@ -203,4 +201,76 @@ if (cartPageContainer) {
       window.location.href = 'menu.html';
     });
   }
+}
+
+// 7. Dynamic Navbar Theme Detection based on Background under the Nav
+const globalNav = document.querySelector('nav');
+if (globalNav) {
+  function updateNavbarTheme() {
+    if (window.scrollY > 20) {
+      globalNav.classList.add('nav-scrolled');
+    } else {
+      globalNav.classList.remove('nav-scrolled');
+    }
+
+    // Temporarily disable pointer events on the nav so we can get the element behind it
+    const originalPointerEvents = globalNav.style.pointerEvents;
+    globalNav.style.pointerEvents = 'none';
+
+    // Get the element behind the navbar (using horizontal center and vertical center of nav bar)
+    const navHeight = globalNav.offsetHeight || 60;
+    const testY = navHeight / 2;
+    const testX = window.innerWidth / 2;
+    const elementBehind = document.elementFromPoint(testX, testY);
+
+    // Restore pointer events
+    globalNav.style.pointerEvents = originalPointerEvents;
+
+    if (!elementBehind) return;
+
+    // Traverse ancestors to find the first non-transparent background color
+    let currentEl = elementBehind;
+    let bg = 'rgba(0, 0, 0, 0)';
+
+    while (currentEl && (bg === 'rgba(0, 0, 0, 0)' || bg === 'transparent' || bg === 'rgba(0,0,0,0)')) {
+      bg = window.getComputedStyle(currentEl).backgroundColor;
+      currentEl = currentEl.parentElement;
+    }
+
+    let isDark = false;
+    if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') {
+      const match = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
+      if (match) {
+        const r = parseInt(match[1], 10);
+        const g = parseInt(match[2], 10);
+        const b = parseInt(match[3], 10);
+        const a = match[4] !== undefined ? parseFloat(match[4]) : 1;
+
+        if (a > 0.1) {
+          // Calculate YIQ brightness
+          const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+          isDark = brightness < 150;
+        }
+      }
+    } else {
+      // Fallback: Check if body has dark-bg class
+      isDark = document.body.classList.contains('dark-bg');
+    }
+
+    if (isDark) {
+      globalNav.classList.add('nav-theme-dark');
+      globalNav.classList.remove('nav-theme-light');
+    } else {
+      globalNav.classList.add('nav-theme-light');
+      globalNav.classList.remove('nav-theme-dark');
+    }
+  }
+
+  window.addEventListener('scroll', updateNavbarTheme);
+  window.addEventListener('resize', updateNavbarTheme);
+  
+  // Run update immediately and after DOM/Styles loads
+  updateNavbarTheme();
+  window.addEventListener('DOMContentLoaded', updateNavbarTheme);
+  setTimeout(updateNavbarTheme, 100);
 }

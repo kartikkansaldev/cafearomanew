@@ -131,3 +131,57 @@ nav.nav-hidden {
     display: none !important;
   }
 }
+
+/* ── NAVBAR SCROLL GLASSMORPHISM EFFECT ── */
+nav.nav-scrolled {
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+/* ── DYNAMIC BACKGROUND INHERITED STYLES ── */
+nav.nav-theme-dark .pill {
+  color: #fff;
+}
+
+nav.nav-theme-dark .pill:hover {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+nav.nav-theme-dark .hamburger-btn {
+  color: #fff;
+}
+
+nav.nav-theme-dark .mobile-home-btn {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+
+nav.nav-theme-light .pill {
+  color: #111;
+}
+
+nav.nav-theme-light .pill:hover {
+  color: #111;
+  border-bottom-color: #111;
+}
+
+nav.nav-theme-light .hamburger-btn {
+  color: #111;
+}
+
+nav.nav-theme-light .mobile-home-btn {
+  border-color: rgba(0, 0, 0, 0.3);
+}
+
+
+/* On mobile menu overlay, make sure pills are always dark */
+@media (max-width: 768px) {
+  .nav-center.menu-open .pill {
+    color: #111 !important;
+  }
+}
+
+

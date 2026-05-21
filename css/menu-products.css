@@ -214,3 +214,19 @@
     width: 90%;
   }
 }
+
+/* ── DARK BACKGROUND PRODUCT CARD STYLES ── */
+body.dark-bg .product-name {
+  color: #fff;
+}
+
+body.dark-bg .size-btn {
+  color: #fff;
+  border-color: #fff;
+}
+
+body.dark-bg .size-btn:hover {
+  background-color: #fff;
+  color: #111;
+}
+

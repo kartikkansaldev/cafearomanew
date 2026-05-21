@@ -35,6 +35,9 @@ tabButtons.forEach(button => {
     // We read the custom HTML attribute data-color using dataset (L23-26)
     if (button.dataset.color) {
       document.body.style.backgroundColor = button.dataset.color;
+      updateBodyTheme(button.dataset.color);
+      // Dispatch scroll event so navbar text color updates to match new background color
+      window.dispatchEvent(new Event('scroll'));
     }
 
     // Step E: Switch the panels!
@@ -60,11 +63,34 @@ tabButtons.forEach(button => {
   });
 });
 
+// Helper function to update theme class based on background brightness
+function updateBodyTheme(colorHex) {
+  if (!colorHex || colorHex[0] !== '#') {
+    document.body.classList.add('dark-bg');
+    document.body.classList.remove('light-bg');
+    return;
+  }
+  const hex = colorHex.substring(1);
+  const r = parseInt(hex.substr(0, 2), 16);
+  const g = parseInt(hex.substr(2, 2), 16);
+  const b = parseInt(hex.substr(4, 2), 16);
+  const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+  
+  if (brightness < 150) {
+    document.body.classList.add('dark-bg');
+    document.body.classList.remove('light-bg');
+  } else {
+    document.body.classList.add('light-bg');
+    document.body.classList.remove('dark-bg');
+  }
+}
+
 // 4. Initialize Background Color on Load
 // Find the currently active tab (if any) and set the body color to match its dataset.color
 const initialActiveTab = document.querySelector('.tab-btn.active, .star-tab.active');
 if (initialActiveTab && initialActiveTab.dataset.color) {
   document.body.style.backgroundColor = initialActiveTab.dataset.color;
+  updateBodyTheme(initialActiveTab.dataset.color);
 }
 
 // 5. Smart Sticky Navbar (Hide on scroll down, show on scroll up)
