@@ -1,0 +1,156 @@
+/* ============================================================
+   reviews.css — Reviews Section (Green, Cards)
+   Topic: Flexbox (Lecture 19-21), Pseudo-elements (Lecture 22-23),
+          nth-child Selector (Lecture 13-15), Transitions (Lecture 25-26)
+   ============================================================ */
+
+/* Outer container for the entire Reviews section */
+.reviews {
+  display: flex;
+  flex-direction: column;   /* stack header then cards */
+  justify-content: center;  /* vertically centre content */
+  padding: 120px 50px;      /* lots of breathing room */
+  min-height: 100vh;        /* at least full screen tall */
+  background-color: #5a7a5a; /* medium sage green */
+  flex-shrink: 0;
+  position: relative;       /* needed for any positioned children */
+}
+
+/* The "What People Say" heading area */
+.reviews-header {
+  text-align: center;
+  margin-bottom: 80px; /* space between heading and cards */
+}
+
+/* The big brush-script section title */
+.reviews-title {
+  font-family: 'Yellowtail', cursive;
+  font-size: clamp(60px, 8vw, 100px); /* scales: min 60px, ideal 8vw, max 100px */
+  color: #fff;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.1); /* subtle shadow */
+  transform: rotate(-2deg); /* slight playful tilt */
+  line-height: 1;
+}
+
+/* Row of review cards — Flexbox with wrapping */
+.reviews-grid {
+  display: flex;
+  gap: 30px;            /* 30px space between cards */
+  justify-content: center;
+  flex-wrap: wrap;      /* cards wrap to next row on small screens */
+  max-width: 1400px;
+  margin: 0 auto;       /* horizontally centre the grid */
+}
+
+/* Each individual review card */
+.review-card {
+  flex: 1;              /* each card grows to fill available space equally */
+  min-width: 320px;     /* never smaller than this */
+  max-width: 420px;     /* never larger than this */
+  display: flex;
+  flex-direction: column; /* stack: stars → text → author */
+  gap: 20px;
+  border-radius: 20px;  /* nicely rounded corners */
+  padding: 50px 40px;   /* spacious inside */
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* springy animation */
+  position: relative;   /* needed for the big quote-mark pseudo-element */
+  overflow: hidden;     /* clip the giant quote mark that goes outside */
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15); /* shadow below card */
+}
+
+/* UNIQUE BACKGROUND COLOURS per card using nth-child selector */
+/* Selects the 1st card in the grid */
+.review-card:nth-child(1) { background: #f5c9b0; } /* soft peach */
+/* Selects the 2nd card — also pushed down 30px for a staggered look */
+.review-card:nth-child(2) { background: #f2c4a0; transform: translateY(30px); }
+/* Selects the 3rd card */
+.review-card:nth-child(3) { background: #d4e8c2; } /* mint green */
+
+/* Hover: all cards lift up and scale slightly */
+.review-card:hover              { transform: translateY(-10px) scale(1.02); }
+/* Special hover for 2nd card (it starts 30px lower) */
+.review-card:nth-child(2):hover { transform: translateY(20px) scale(1.02); }
+
+/* Big decorative opening quotation mark — added via CSS, not HTML */
+/* ::before creates a virtual element before the card's content */
+.review-card::before {
+  content: '\201C';       /* Unicode for the " opening quote character */
+  font-family: 'Yellowtail', cursive;
+  position: absolute;     /* layered inside card */
+  top: -20px;             /* partially above the card */
+  left: 20px;
+  font-size: 150px;       /* enormous decorative size */
+  color: rgba(120,140,140,0.15); /* very faint — purely decorative */
+  line-height: 1;
+  z-index: 0;             /* sits behind the text (text is z-index: 1) */
+}
+
+/* The five gold stars */
+.review-stars {
+  color: #9f4920;        /* deep terracotta orange for stars */
+  font-size: 20px;
+  letter-spacing: 5px;   /* space between stars */
+  position: relative;
+  z-index: 1;            /* sits in front of the quote mark */
+}
+
+/* The actual review text */
+.review-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.6;      /* comfortable line spacing for reading */
+  color: #111;
+  flex-grow: 1;          /* stretches to fill remaining space in card */
+  position: relative;
+  z-index: 1;
+}
+
+/* Row with avatar photo + name + title */
+.review-author {
+  display: flex;
+  align-items: center; /* vertically centre avatar with text */
+  gap: 15px;           /* space between avatar and name */
+  margin-top: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Circular avatar with initials */
+.author-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;   /* makes it a perfect circle */
+  background: #788c8c;  /* grey-teal background */
+  color: #fef5b3;       /* cream-coloured letter */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Space Mono', monospace;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* Stack: reviewer's name above their title */
+.author-info {
+  display: flex;
+  flex-direction: column; /* name on top, title below */
+}
+
+/* Reviewer's name */
+.author-name {
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #111;
+}
+
+/* Reviewer's role/location */
+.author-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: rgba(0,0,0,0.5); /* semi-transparent for a lighter look */
+  letter-spacing: 0.1em;
+}

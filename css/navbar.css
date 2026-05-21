@@ -1,0 +1,133 @@
+/* ============================================================
+   navbar.css — Navigation Bar (shared by ALL pages)
+   Topic: Flexbox (Lecture 19-21), Position (Lecture 16-18)
+   ============================================================ */
+
+/* Remove default margin and padding from EVERY element */
+* {
+  margin: 0;      /* no outside spacing */
+  padding: 0;     /* no inside spacing */
+  box-sizing: border-box; /* padding won't increase element's total size */
+}
+
+/* The <nav> tag — sticks to the very top of the screen */
+nav {
+  position: fixed;          /* fixed = stays at top even when you scroll */
+  top: 0;                   /* distance from top of screen = 0 */
+  left: 0;                  /* starts from left edge */
+  right: 0;                 /* stretches to right edge */
+  display: flex;            /* Flexbox: put children side by side */
+  justify-content: space-between; /* HOME on far left, CART on far right */
+  align-items: center;      /* vertically center the links */
+  padding: 16px 20px;       /* 16px top/bottom, 20px left/right */
+  z-index: 100;             /* stays on top of all other sections */
+  background-color: transparent; /* see-through background */
+  transition: top 0.3s ease, background-color 0.3s ease, transform 0.3s ease; /* smooth colour fade when scrolling */
+}
+
+/* Added by JS when scrolling down to hide the navbar */
+nav.nav-hidden {
+  transform: translateY(-100%);
+}
+
+/* The middle group (MENU, REWARDS, LOCATION) */
+.nav-center {
+  display: flex;            /* puts middle links side by side */
+  gap: 10px;                /* 10px gap between each middle link */
+  position: absolute;       /* removes it from normal flow */
+  left: 50%;                /* move to horizontal centre */
+  transform: translateX(-50%); /* nudge left by half its own width — perfect centering */
+}
+
+/* Style for every navigation link (HOME, MENU, REWARDS, etc.) */
+.pill {
+  background-color: transparent; /* no background */
+  color: #111;                   /* dark text */
+  font-family: 'Space Mono', monospace; /* typewriter font */
+  font-size: 11px;               /* small text */
+  font-weight: 700;              /* bold */
+  letter-spacing: 0.25em;        /* extra spacing between letters */
+  padding: 10px 16px;            /* inside spacing (top/bottom, left/right) */
+  text-decoration: none;         /* removes underline from link */
+  transition: color 0.2s, opacity 0.2s, transform 0.2s; /* smooth hover animation */
+  opacity: 1;                    /* fully visible/dark text */
+}
+
+/* When mouse hovers over any pill link */
+.pill:hover {
+  opacity: 1;    /* fully visible */
+  color: #111;   /* same dark color */
+  transform: translateY(-2px); /* slight lift on hover to show interaction */
+}
+
+/* ── HAMBURGER MENU BUTTON ── */
+.hamburger-btn {
+  display: none; /* hidden on desktop */
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #111;
+  z-index: 200;
+}
+
+/* Hide links that are duplicated inside the mobile menu on desktop */
+.hamburger-only {
+  display: none;
+}
+
+/* ── RESPONSIVE DESIGN (Syllabus: Media Queries) ── */
+@media (max-width: 768px) {
+  /* Show hamburger button */
+  .hamburger-btn {
+    display: block;
+  }
+  
+  /* Hide standard pills */
+  nav > .pill { display: none; }
+  
+  /* The center links turn into a fullscreen overlay */
+  .nav-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: -100vh; /* hidden above the screen initially */
+    left: 0;
+    right: 0;
+    height: 100vh;
+    background: rgba(245, 237, 200, 0.98); /* warm cream overlay */
+    transform: none; /* reset desktop center transform */
+    transition: top 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: 150;
+    gap: 40px;
+  }
+  
+  /* When the 'menu-open' class is added via JavaScript, slide down! */
+  .nav-center.menu-open {
+    top: 0;
+  }
+  
+  /* Make the links huge in the overlay */
+  .nav-center .pill {
+    font-size: 24px;
+    opacity: 1;
+    display: block; /* ensure hamburger-only links show here */
+  }
+  
+  /* Keep the cart button visible on the right, but next to the hamburger?
+     Actually, let's keep CART in the overlay, and just show Logo/Home and Hamburger on nav bar */
+  .mobile-home-btn {
+    display: block !important; /* Force home to show */
+    font-size: 16px;
+    font-family: 'Yellowtail', cursive;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  
+  /* Hide the desktop cart button */
+  .desktop-cart {
+    display: none !important;
+  }
+}

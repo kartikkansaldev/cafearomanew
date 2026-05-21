@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Café Aroma — Cart</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Yellowtail&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/footer.css">
+  
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f5edc8; /* Cream background for cart */
+      font-family: 'Space Mono', monospace;
+      color: #111;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    
+    .cart-wrapper {
+      flex-grow: 1;
+      max-width: 800px;
+      margin: 120px auto 60px; /* Space for navbar */
+      padding: 40px;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-family: 'Yellowtail', cursive;
+      font-size: 60px;
+      color: #4a5c2f;
+      margin: 0 0 40px 0;
+      text-align: center;
+    }
+    
+    .checkout-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 2px solid #eee;
+    }
+    
+    .total-price {
+      font-size: 24px;
+      font-weight: 700;
+      color: #4a5c2f;
+    }
+    
+    .checkout-btn {
+      background: #1e7a3c;
+      color: #fff;
+      border: none;
+      padding: 15px 40px;
+      font-family: 'Space Mono', monospace;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .checkout-btn:hover {
+      background: #155c2c;
+    }
+
+    /* Base styles for JS injected cart rows */
+    .cart-item-row { display: flex; align-items: center; justify-content: space-between; }
+    .cart-item-left { display: flex; align-items: center; gap: 20px; }
+    .cart-item-right { display: flex; align-items: center; gap: 20px; }
+    
+    @media (max-width: 768px) {
+      .cart-wrapper { padding: 30px 20px; margin: 90px auto 40px; }
+      h1 { font-size: 40px; }
+      
+      .cart-item-row { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .cart-item-right { width: 100%; justify-content: space-between; border-top: 1px dashed #eee; padding-top: 12px; }
+      
+      .checkout-row { flex-direction: column; gap: 20px; }
+      .checkout-btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav style="background: transparent;">
+    <a class="pill mobile-home-btn" href="index.html" style="color: #111; border-color: #111;">H O M E</a>
+    <div class="nav-center" id="mobile-menu">
+      <a class="pill hamburger-only" href="index.html">H O M E</a>
+      <a class="pill" href="menu.html">M E N U</a>
+      <a class="pill" href="rewards.html">R E W A R D S</a>
+      <a class="pill" href="index.html#locations">L O C A T I O N</a>
+      <a class="pill hamburger-only" href="cart.html">C A R T</a>
+    </div>
+    <a class="pill desktop-cart" href="cart.html" style="color: #1e7a3c; border-color: #1e7a3c; background: transparent;">C A R T</a>
+    <button class="hamburger-btn" onclick="document.getElementById('mobile-menu').classList.toggle('menu-open')">☰</button>
+  </nav>
+
+  <div class="cart-wrapper">
+    <h1>Your Cart</h1>
+    
+    <!-- JS will populate this container -->
+    <div id="cart-page-items">
+      <!-- Items go here -->
+    </div>
+    
+    <div class="checkout-row">
+      <div class="total-price">Total: <span id="cart-total-price">₹0</span></div>
+      <button class="checkout-btn" id="checkout-btn">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+
+    <!-- Top row: LOCATION | Brand + Social | CONTACT -->
+    <div class="footer-top">
+
+      <!-- Left: Location -->
+      <div class="footer-col">
+        <span class="footer-label">L O C A T I O N</span>
+        <div class="footer-oval">
+          <p class="footer-text">SECTOR 17-C
+CHANDIGARH, 160017
+INDIA</p>
+        </div>
+      </div>
+
+      <!-- Center: Logo -->
+      <div class="footer-col-center">
+        <span class="footer-label">C A F &Eacute; &nbsp; A R O M A</span>
+        <span class="footer-social">@CAFEAROMA.CHD</span>
+      </div>
+
+      <!-- Right: Contact -->
+      <div class="footer-col" style="align-items: flex-end;">
+        <span class="footer-label">C O N T A C T</span>
+        <div class="footer-oval">
+          <p class="footer-text">GENERAL INQUIRIES:
+HELLO@CAFEAROMA.IN
+
+WHOLESALE INQUIRIES:
+WHOLESALE@CAFEAROMA.IN</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Mid row: About Us | Copyright | Colophon -->
+    <div class="footer-mid">
+      <div class="footer-mid-col">
+        <span class="footer-label">A B O U T &nbsp; U S</span>
+        <p class="footer-text" style="text-align:left;">WHO WE ARE AND
+WHAT WE DO</p>
+      </div>
+      <div class="footer-mid-col center">
+        <span class="footer-label">C O P Y R I G H T</span>
+        <p class="footer-text">&copy; 2026 CAF&Eacute; AROMA, LLC</p>
+      </div>
+      <div class="footer-mid-col right">
+        <span class="footer-label">C O L O P H O N</span>
+        <p class="footer-text">SITE: YOUR STUDIO
+CODE: YOUR TEAM</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Link the shared cart.js to handle the logic -->
+  <script src="js/cart.js"></script>
+</body>
+</html>

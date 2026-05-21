@@ -1,0 +1,156 @@
+/* ============================================================
+   locations.css — Locations Section (Yellow, Photo Scroll)
+   Topic: Flexbox (Lecture 19-21), Overflow & Scroll,
+          Transitions & Hover Effects (Lecture 25-26)
+   ============================================================ */
+
+/* Outer container for the entire Locations section */
+.locations {
+  display: flex;           /* Flexbox: stack children top to bottom */
+  flex-direction: column;  /* photos on top, info bar on bottom */
+  height: 100vh;           /* full screen height */
+  background-color: #fef5b3; /* pale yellow background */
+  flex-shrink: 0;          /* do not shrink */
+}
+
+/* The scrollable row of location photos */
+.locations-photos {
+  display: flex;                   /* side-by-side photos */
+  flex: 1;                         /* takes up most of the section height */
+  width: 100%;
+  overflow-x: auto;                /* enables horizontal scrolling */
+  scroll-snap-type: x mandatory;   /* snaps to each photo when scrolling */
+  -ms-overflow-style: none;        /* hides scrollbar in Internet Explorer */
+  scrollbar-width: none;           /* hides scrollbar in Firefox */
+}
+
+/* Hides scrollbar in Chrome and Safari */
+.locations-photos::-webkit-scrollbar {
+  display: none;
+}
+
+/* Each individual photo "frame" */
+.loc-img-wrap {
+  flex: 0 0 auto;          /* does not grow or shrink — keeps fixed size */
+  height: 100%;            /* same height as the scroll container */
+  aspect-ratio: 1 / 1;    /* always a perfect square */
+  position: relative;      /* parent for the overlay text */
+  overflow: hidden;        /* hides anything outside the square frame */
+  scroll-snap-align: start; /* each photo snaps to the left edge */
+  cursor: pointer;         /* shows hand cursor on hover */
+}
+
+/* The actual photo inside each frame */
+.loc-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;       /* fills the square without stretching */
+  transition: transform 0.4s ease; /* smooth zoom on hover */
+}
+
+/* The dark overlay + city name that appears on hover */
+.loc-overlay {
+  position: absolute;      /* layered on top of the photo */
+  inset: 0;                /* shorthand: top:0; right:0; bottom:0; left:0 — covers entire photo */
+  background: rgba(0,0,0,0.4); /* semi-transparent black */
+  display: flex;
+  align-items: center;     /* vertically centre the city name */
+  justify-content: center; /* horizontally centre the city name */
+  opacity: 0;              /* invisible by default */
+  transition: opacity 0.4s ease; /* fades in on hover */
+  color: #fff;
+  font-family: 'Space Mono', monospace;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Show overlay when mouse is over the photo frame */
+.loc-img-wrap:hover .loc-overlay {
+  opacity: 1; /* becomes fully visible */
+}
+
+/* Zoom photo slightly on hover */
+.loc-img-wrap:hover .loc-photo {
+  transform: scale(1.1); /* grows to 110% of its size */
+}
+
+/* Bottom info bar: title on left, pills in centre, button on right */
+.locations-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* spread items across full width */
+  padding: 30px 40px 100px 40px;  /* 100px bottom to clear the ticker bar */
+  background-color: #fef5b3;      /* same yellow as the section */
+}
+
+/* "Our Locations" heading */
+.loc-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #111;
+}
+
+/* Row of city name pills */
+.loc-pills {
+  display: flex;
+  gap: 12px;        /* space between each pill */
+  flex-wrap: wrap;  /* wraps to next line on small screens */
+  justify-content: center;
+}
+
+/* Each city pill (e.g. "CHANDIGARH", "DELHI") */
+.loc-pill {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #111;
+  padding: 10px 20px;
+  border: 1.5px solid #111; /* dark outline */
+  border-radius: 999px;      /* pill shape */
+  text-decoration: none;
+  transition: all 0.2s;     /* smooth fill on hover */
+}
+
+/* Hover: pill fills with black, text turns white */
+.loc-pill:hover {
+  background-color: #111;
+  color: #fff;
+}
+
+/* "Visit All" solid black button on the right */
+.loc-visit {
+  background-color: #111;
+  color: #fff;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  padding: 12px 24px;
+  border-radius: 999px; /* pill shape */
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.loc-visit:hover {
+  background-color: #2c2c2c; /* slightly lighter black on hover */
+}
+
+/* ── RESPONSIVE DESIGN (Syllabus: Media Queries) ── */
+@media (max-width: 768px) {
+  .locations-bottom {
+    flex-direction: column;
+    gap: 24px;
+    padding: 30px 20px 80px 20px;
+    text-align: center;
+  }
+  
+  .loc-pills {
+    justify-content: center;
+  }
+}

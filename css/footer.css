@@ -1,0 +1,200 @@
+/* ============================================================
+   footer.css — Footer Section (Gold/Mustard, Big Brand Name)
+   Topic: Flexbox (Lecture 19-21), Box Model (Lecture 16-18)
+   ============================================================ */
+
+/* The entire footer section */
+.site-footer {
+  background-color: #9f8a3c; /* mustard gold colour */
+  padding: 60px 60px 50px;   /* top: 60, sides: 60, bottom: 50 */
+  min-height: 100vh;          /* at least full screen tall */
+  display: flex;
+  flex-direction: column;     /* stack: top row → big name → middle → bottom row */
+  justify-content: space-between; /* spreads sections top to bottom */
+  flex-shrink: 0;
+}
+
+/* TOP ROW: Location | Café Aroma | Contact */
+.footer-top {
+  display: flex;
+  justify-content: space-between; /* three columns spread across */
+  align-items: flex-start;        /* aligned to the top */
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+/* Each of the three columns in the top row */
+.footer-col {
+  display: flex;
+  flex-direction: column; /* items stack vertically */
+  gap: 16px;              /* space between label and oval */
+  flex: 1;                /* each column takes equal share of width */
+}
+
+/* The centre column (brand name + social) */
+.footer-col-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centre everything horizontally */
+  gap: 12px;
+}
+
+/* The pill-shaped location/contact boxes */
+.footer-oval {
+  border: 2px solid #111;  /* dark border */
+  border-radius: 999px;    /* very large radius = oval shape */
+  padding: 22px 36px;      /* comfortable inside space */
+  display: inline-block;   /* shrinks to fit content, respects padding */
+}
+
+/* Small spaced-out heading labels (e.g. "L O C A T I O N") */
+.footer-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3em;   /* very wide letter spacing for a spaced-out look */
+  color: #111;
+  text-transform: uppercase;
+}
+
+/* The address / contact text inside ovals */
+.footer-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  line-height: 1.8;       /* generous line spacing for readability */
+  color: #111;
+  text-align: center;
+}
+
+/* The social handle "@CAFEAROMA.CHD" */
+.footer-social {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #111;
+}
+
+/* MIDDLE ROW: About Us | Copyright | Colophon */
+.footer-mid {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  padding-top: 40px;
+  border-top: 2px solid rgba(0,0,0,0.2); /* thin separator line */
+  margin-bottom: 20px;
+}
+
+/* Each column inside the middle row */
+.footer-mid-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+/* Centre column variant */
+.footer-mid-col.center {
+  align-items: center;
+  text-align: center;
+}
+
+/* Right column variant */
+.footer-mid-col.right {
+  align-items: flex-end; /* pushes children to the right edge */
+  text-align: right;
+}
+
+/* The giant "Café Aroma" brush script — main visual of the footer */
+.footer-big-name {
+  font-family: 'Yellowtail', cursive;
+  font-size: clamp(60px, 10vw, 130px); /* huge, scales with screen */
+  color: #111;
+  text-align: center;
+  line-height: 1;
+  padding: 10px 0 30px;
+}
+
+/* BOTTOM BAR: Links on the left */
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0 30px;
+  border-top: 2px solid rgba(0,0,0,0.2); /* thin separator */
+}
+
+/* Stacked links (Terms & Conditions, Privacy Policy) */
+.footer-bottom-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Each link at the bottom */
+.footer-bottom-link {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #111;
+  text-decoration: none; /* remove underline */
+}
+
+/* Underline appears only on hover */
+.footer-bottom-link:hover { text-decoration: underline; }
+
+/* The solid black button on the right (e.g. "FIND A STORE") */
+.footer-btn {
+  background-color: #111;
+  color: #fff;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  padding: 16px 36px;
+  border-radius: 999px; /* pill shape */
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.footer-btn:hover { background-color: #333; }
+
+/* ── RESPONSIVE DESIGN (Syllabus: Media Queries) ── */
+@media (max-width: 768px) {
+  .site-footer {
+    padding: 40px 20px;
+  }
+  
+  .footer-top {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+  
+  .footer-col {
+    align-items: center !important;
+  }
+  
+  .footer-mid {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+  
+  .footer-mid-col, .footer-mid-col.right {
+    align-items: center;
+    text-align: center;
+  }
+  
+  .footer-text {
+    text-align: center !important;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    gap: 30px;
+  }
+}

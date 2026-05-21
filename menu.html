@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <!-- Basic Meta Tags (Syllabus: Introduction to HTML) -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Café Aroma — Menu</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Yellowtail&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!--
+    CSS FILES — one per section (easy to find and study!)
+    navbar.css      → top navigation bar
+    menu-tabs.css   → sub-navigation tabs + tab switching logic
+    menu-products.css → product cards (image, name, add button)
+    menu-featured.css → featured/finding/previous panel content
+    footer.css      → footer at the bottom
+  -->
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/menu-tabs.css" />
+  <link rel="stylesheet" href="css/menu-products.css" />
+  <link rel="stylesheet" href="css/menu-featured.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+</head>
+
+<body>
+
+  
+  <nav>
+    <a class="pill mobile-home-btn" href="index.html">H O M E</a>
+    
+    <div class="nav-center" id="mobile-menu">
+      <a class="pill hamburger-only" href="index.html">H O M E</a>
+      <a class="pill" href="#">M E N U</a>
+      <a class="pill" href="rewards.html">R E W A R D S</a>
+      <a class="pill" href="index.html#locations">L O C A T I O N</a>
+      <a class="pill hamburger-only" href="cart.html">C A R T</a>
+    </div>
+    
+    <a class="pill desktop-cart" href="cart.html">C A R T</a>
+    <button class="hamburger-btn" onclick="document.getElementById('mobile-menu').classList.toggle('menu-open')">☰</button>
+  </nav>
+
+  <!-- TAB CONTROLS (JAVASCRIPT) -->
+  <!-- Using Flexbox to arrange the labels side-by-side -->
+  <div class="sub-nav">
+    <div class="tab-btn active" data-target="panel-menu" data-color="#4a5c2f">M E N U</div>
+    <div class="tab-btn" data-target="panel-featured" data-color="#5a7a5a">F E A T U R E D</div>
+    <div class="tab-btn" data-target="panel-finding" data-color="#788c8c">O U R &nbsp; F I N D I N G</div>
+    <div class="tab-btn" data-target="panel-previous" data-color="#9f4920">P R E V I O U S</div>
+    <div class="tab-btn" data-target="panel-fav" data-color="#9f8a3c">&#9829; &nbsp; F A V O U R I T E</div>
+  </div>
+
+  <div class="menu-layout">
+    <div class="tab-panels">
+
+      <!-- MENU PANEL (Starbucks-style drinks) -->
+      <div class="tab-panel panel-menu active" id="panel-menu">
+        <div class="featured-hero">
+          <div class="featured-banner">
+            <p class="featured-season-tag" style="color: #d4e9c4;">&#9749; THE CLASSICS</p>
+            <h2 class="featured-banner-title">Cafe<br>Menu</h2>
+            <p class="featured-banner-sub">Handcrafted beverages prepared with passion. Discover your next favorite
+              drink.</p>
+          </div>
+
+          <div class="featured-drinks-section">
+            <p class="featured-drinks-title" style="margin-top: -20px;">H O T &nbsp; C O F F E E S</p>
+            
+            <div class="featured-grid" id="hot-coffee-grid">
+              <!-- JS will dynamically inject product cards here! -->
+            </div>
+
+            <p class="featured-drinks-title" style="margin-top: 50px;">C O L D &nbsp; C O F F E E S</p>
+            <div class="featured-grid" id="cold-coffee-grid">
+              <!-- JS will dynamically inject product cards here! -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FEATURED PANEL (Starbucks seasonal) -->
+      <div class="tab-panel panel-featured" id="panel-featured">
+        <div class="featured-hero">
+          <!-- Big seasonal banner -->
+          <div class="featured-banner">
+            <p class="featured-season-tag">&#9728; SUMMER SERIES 2026</p>
+            <h2 class="featured-banner-title">Summer<br>Sips</h2>
+            <p class="featured-banner-sub">Sun-kissed drinks crafted to keep you cool. Limited season, unlimited
+              flavour.</p>
+            <a href="#" class="featured-order-btn">O R D E R &nbsp; N O W</a>
+          </div>
+          <!-- Featured drink cards -->
+          <div class="featured-drinks-section">
+            <p class="featured-drinks-title">T H I S &nbsp; W E E K ' S &nbsp; P I C K S</p>
+            <div class="featured-grid">
+
+              <div class="featured-card" data-id="feat-1">
+                <button class="heart-btn" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;">♡</button>
+                <img class="featured-card-img" src="assets/drinks/mango_cold_brew_1779306848768.png"
+                  alt="Mango Cold Brew">
+                <div class="featured-card-body">
+                  <p class="featured-card-tag">&#9733; STAFF FAVOURITE</p>
+                  <h3 class="featured-card-title">Mango Cold Brew</h3>
+                  <p class="featured-card-desc">Slow-steeped cold brew shaken with real mango purée and a hint of
+                    chilli. Dangerously refreshing.</p>
+                  <div class="featured-card-footer">
+                    <span class="featured-card-price">&#8377; 340</span>
+                    <button class="featured-card-btn add-to-cart-btn" data-id="feat-1" data-name="Mango Cold Brew" data-price="340">A D D</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="featured-card" data-id="feat-2">
+                <button class="heart-btn" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;">♡</button>
+                <img class="featured-card-img" src="assets/drinks/lavender_latte_1779307028256.png"
+                  alt="Lavender Latte">
+                <div class="featured-card-body">
+                  <p class="featured-card-tag">&#128293; TRENDING</p>
+                  <h3 class="featured-card-title">Lavender Latte</h3>
+                  <p class="featured-card-desc">Oat milk latte with house-made lavender syrup and a dusting of dried
+                    lavender buds on top.</p>
+                  <div class="featured-card-footer">
+                    <span class="featured-card-price">&#8377; 310</span>
+                    <button class="featured-card-btn add-to-cart-btn" data-id="feat-2" data-name="Lavender Latte" data-price="310">A D D</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OUR FINDING PANEL — Coffee Pouches -->
+      <div class="tab-panel panel-finding" id="panel-finding">
+        <div class="finding-section">
+          <p class="finding-sub">OUR SIGNATURE BLENDS</p>
+          <h2 class="finding-title">Our Finding</h2>
+          <!-- Reuse the existing shop grid with pouches -->
+          <div class="shop-grid" style="padding: 0; overflow-x: auto; margin-top: 20px;">
+
+            <div class="product-card" id="finding-french-vanilla" data-id="find-1" style="position:relative;">
+              <button class="heart-btn" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;">♡</button>
+              <div class="product-img-wrap">
+                
+                <img src="now_make_different_flavour_of_202605201454.jpeg" alt="French Vanilla Ground Coffee" />
+              </div>
+              <div class="product-info">
+                <p class="product-name">French Vanilla</p>
+                <div class="product-size-row">
+                  <button class="size-btn"><svg viewBox="0 0 24 24">
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>12 OZ &#8377;1,499</button>
+                </div>
+                <div class="product-action-row">
+                  <div class="combined-add-btn">
+                    <div class="qty-control">
+                      <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
+                      <span class="qty-num" id="qty-find-1">1</span>
+                      <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+                    </div>
+                    <div class="qty-divider"></div>
+                    <button class="add-btn-text add-to-cart-btn" data-id="find-1" data-name="French Vanilla" data-price="1499">A D D</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="product-card" id="finding-hazelnut-vanilla" data-id="find-2" style="position:relative;">
+              <button class="heart-btn" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;">♡</button>
+              <div class="product-img-wrap">
+                <img src="now_make_different_flavour_of_202605201438.jpeg" alt="Hazelnut Vanilla Ground Coffee" />
+              </div>
+              <div class="product-info">
+                <p class="product-name">Hazelnut Vanilla</p>
+                <div class="product-size-row">
+                  <button class="size-btn"><svg viewBox="0 0 24 24">
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>12 OZ &#8377;1,499</button>
+                </div>
+                <div class="product-action-row">
+                  <div class="combined-add-btn">
+                    <div class="qty-control">
+                      <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
+                      <span class="qty-num" id="qty-find-2">1</span>
+                      <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+                    </div>
+                    <div class="qty-divider"></div>
+                    <button class="add-btn-text add-to-cart-btn" data-id="find-2" data-name="Hazelnut Vanilla" data-price="1499">A D D</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="product-card" id="finding-hazelnut-roast" data-id="find-3" style="position:relative;">
+              <button class="heart-btn" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;">♡</button>
+              <div class="product-img-wrap">
+                <img src="now_make_different_flavour_of_202605201454(1).jpeg" alt="Hazelnut Roast Ground Coffee" />
+              </div>
+              <div class="product-info">
+                <p class="product-name">Hazelnut Roast</p>
+                <div class="product-size-row">
+                  <button class="size-btn"><svg viewBox="0 0 24 24">
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>12 OZ &#8377;1,649</button>
+                </div>
+                <div class="product-action-row">
+                  <div class="combined-add-btn">
+                    <div class="qty-control">
+                      <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
+                      <span class="qty-num" id="qty-find-3">1</span>
+                      <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+                    </div>
+                    <div class="qty-divider"></div>
+                    <button class="add-btn-text add-to-cart-btn" data-id="find-3" data-name="Hazelnut Roast" data-price="1649">A D D</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="product-card" id="finding-original-roast" data-id="find-4" style="position:relative;">
+              <button class="heart-btn" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; color: #fff; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.3); z-index: 10;">♡</button>
+              <div class="product-img-wrap">
+                <img src="don't_add_background_2K_202605201454.jpeg" alt="Original Roast Ground Coffee" />
+              </div>
+              <div class="product-info">
+                <p class="product-name">Original Roast</p>
+                <div class="product-size-row">
+                  <button class="size-btn"><svg viewBox="0 0 24 24">
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>12 OZ &#8377;1,499</button>
+                </div>
+                <div class="product-action-row">
+                  <div class="combined-add-btn">
+                    <div class="qty-control">
+                      <button class="qty-btn" onclick="changeQty(this,-1)">&#8722;</button>
+                      <span class="qty-num" id="qty-find-4">1</span>
+                      <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+                    </div>
+                    <div class="qty-divider"></div>
+                    <button class="add-btn-text add-to-cart-btn" data-id="find-4" data-name="Original Roast" data-price="1499">A D D</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- PREVIOUS PANEL -->
+      <div class="tab-panel panel-previous" id="panel-previous">
+        <div class="featured-hero">
+          <div class="featured-banner">
+            <h2 class="featured-banner-title" style="font-size: 80px;">Past<br>Orders</h2>
+            <p class="featured-banner-sub">Your previous orders will appear here. Reorder your favorites with one tap.
+            </p>
+            <a href="#" class="featured-order-btn" style="color: #9f4920;">E X P L O R E &nbsp; M E N U</a>
+          </div>
+          <div class="featured-drinks-section" style="min-height: 40vh; background: transparent;">
+            <div class="featured-grid" id="previous-grid">
+              <!-- JS will inject previous orders here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAVOURITE PANEL -->
+      <div class="tab-panel panel-fav" id="panel-fav">
+        <div class="featured-hero">
+          <div class="featured-banner">
+            <h2 class="featured-banner-title" style="font-size: 80px;">Your<br>Favorites</h2>
+            <p class="featured-banner-sub">Tap the heart on any item to save it here for quick access later.</p>
+            <a href="#" class="featured-order-btn" style="color: #9f8a3c;">E X P L O R E &nbsp; M E N U</a>
+          </div>
+          <div class="featured-drinks-section" style="min-height: 40vh; background: transparent;">
+            <div class="featured-grid" id="fav-grid">
+              <!-- JS will inject favorite orders here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT IMPORTS (Syllabus: Connecting external scripts) -->
+  <script src="js/menu-data.js"></script>
+  <script src="js/tabs.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/favorites.js"></script>
+</body>
+
+</html>

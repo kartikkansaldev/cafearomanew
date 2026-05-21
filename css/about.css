@@ -1,0 +1,116 @@
+/* ============================================================
+   about.css — About Section (Dark Green Split Layout)
+   Topic: Flexbox (Lecture 19-21), Position (Lecture 16-18),
+          Transitions (Lecture 25-26)
+   ============================================================ */
+
+/* The whole About section — side-by-side layout */
+.about {
+  display: flex;           /* Flexbox: children go side by side */
+  flex-direction: row;     /* left=text, right=image */
+  align-items: stretch;    /* both columns are same height */
+  height: 100vh;           /* full screen height */
+  background-color: #4a5c2f; /* dark olive green */
+  flex-shrink: 0;          /* do not shrink */
+  padding-bottom: 55px;    /* space at bottom to clear the white ticker bar */
+}
+
+/* LEFT COLUMN — the text side */
+.about-text {
+  flex: 1;               /* takes up half the width (equal share) */
+  display: flex;         /* Flexbox: stack text elements vertically */
+  flex-direction: column;
+  justify-content: center; /* vertically centre the text */
+  padding: 64px 56px;    /* breathing room around text */
+  gap: 40px;             /* space between the paragraph and button */
+}
+
+/* The paragraph text inside the About section */
+.about-text p {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(18px, 2.2vw, 28px); /* scales with screen width */
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.35;      /* space between lines of text */
+  color: #f5edc8;         /* warm cream colour */
+  text-transform: uppercase; /* ALL CAPS */
+}
+
+/* The "About Us" pill button */
+.pill-light {
+  display: inline-block;     /* sits inline but respects padding */
+  background-color: transparent;
+  color: #f5edc8;            /* cream coloured text */
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 0.35em;
+  padding: 10px 22px;
+  border-radius: 999px;      /* pill/oval shape */
+  border: 1.5px solid #f5edc8; /* cream-coloured border */
+  text-decoration: none;
+  align-self: flex-start;    /* aligns to left edge, not stretched */
+  transition: background-color 0.2s, color 0.2s; /* smooth hover */
+}
+
+/* Hover state: fills with cream, text turns green */
+.pill-light:hover {
+  background-color: #f5edc8; /* cream fill */
+  color: #4a5c2f;            /* dark green text */
+}
+
+/* RIGHT COLUMN — the image side (outer padding container) */
+.about-img {
+  flex: 1;                 /* takes up the other half of width */
+  padding: 24px 24px 24px 0; /* padding except on the left */
+  display: flex;
+}
+
+/* Inner wrapper: clips the image with rounded corners */
+.about-img-wrap {
+  flex: 1;
+  overflow: hidden;        /* clips image to the rounded border */
+  border-radius: 14px;     /* rounded corners on the image */
+  position: relative;      /* parent for the absolutely placed image */
+}
+
+/* The actual <img> tag inside the wrapper */
+.about-img-wrap img {
+  position: absolute;      /* layered inside its container */
+  top: 0;
+  left: 0;
+  width: 80%;              /* slightly narrower than container */
+  height: 130%;            /* taller than container — gives parallax room */
+  object-fit: cover;       /* fills space without distorting */
+  object-position: center top; /* crops from the top */
+  display: block;
+  will-change: transform;  /* hints browser to prepare GPU animation */
+  transform: translateY(0); /* JavaScript moves this on scroll */
+}
+
+/* ── RESPONSIVE DESIGN (Syllabus: Media Queries) ── */
+@media (max-width: 768px) {
+  .about {
+    flex-direction: column;
+    height: auto;
+  }
+  
+  .about-text {
+    padding: 60px 20px 40px;
+  }
+  
+  .about-text p {
+    font-size: 20px;
+  }
+  
+  .about-img {
+    padding: 0 20px 20px 20px;
+    height: 400px;
+  }
+  
+  .about-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-position: center;
+  }
+}

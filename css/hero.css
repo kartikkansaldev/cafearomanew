@@ -1,0 +1,207 @@
+/* ============================================================
+   hero.css — Hero Section (Homepage Big Title + 3D Cup)
+   Topic: Position (Lecture 16-18), Animations (Lecture 25-26),
+          Flexbox (Lecture 19-21)
+   ============================================================ */
+
+/* The page background colour — burnt orange/terracotta */
+body {
+  background-color: #9f4920; /* deep terracotta orange */
+  min-height: 100vh;          /* at least full screen tall */
+  overflow-x: hidden;         /* hide any horizontal scrollbar */
+  display: flex;              /* Flexbox: stack sections top to bottom */
+  flex-direction: column;     /* children go downward, not sideways */
+}
+
+/* The hero <section> takes up the full screen height */
+.hero {
+  height: 100vh;              /* 100vh = 100% of the visible screen height */
+  display: flex;              /* Flexbox: centre children */
+  flex-direction: column;     /* children stack vertically */
+  align-items: center;        /* centre children horizontally */
+  justify-content: center;    /* centre children vertically */
+  position: relative;         /* parent for absolutely positioned children */
+  flex-shrink: 0;             /* do not shrink even if page is short */
+}
+
+/* The invisible 3D canvas — sits on top of text like a layer */
+#canvas3d {
+  position: absolute;  /* taken out of normal flow, placed over other elements */
+  top: 0;              /* top of hero */
+  left: 0;             /* left of hero */
+  width: 100%;         /* full width */
+  height: 100%;        /* full height */
+  z-index: 5;          /* layer 5: sits IN FRONT of text (which is layer 1) */
+}
+
+/* The huge "Café Aroma" brush-script title */
+.hero-title {
+  font-family: 'Yellowtail', cursive; /* thick brush script font */
+  font-size: clamp(96px, 20vw, 260px); /* clamp(min, ideal, max): scales with screen */
+  line-height: 0.9;                    /* tighter line spacing for large text */
+  color: #111;                         /* near-black */
+  text-align: center;                  /* centred */
+  transform: rotate(-2deg);            /* slight tilt for a playful look */
+  text-shadow: 4px 4px 6px rgba(0,0,0,0.25); /* soft shadow to pop from 3D */
+  position: relative;                  /* needed so z-index works */
+  z-index: 1;                          /* layer 1: sits BEHIND the 3D canvas */
+}
+
+/* Makes each word of the title appear on its own line */
+.t-line {
+  display: block; /* block elements always start on a new line */
+}
+
+/* The small subtitle under the title */
+.hero-sub {
+  font-family: 'Space Mono', monospace; /* typewriter font */
+  font-size: 10px;                      /* very small text */
+  letter-spacing: 0.28em;               /* very wide letter spacing */
+  color: #111;
+  margin-top: 6px;    /* tiny gap above */
+  position: relative; /* needed so z-index works */
+  z-index: 1;         /* layer 1: behind the 3D canvas */
+}
+
+/* ── FLOATING MENU BUTTON (bottom-right corner of hero) ── */
+.hero-menu-btn {
+  position: absolute;    /* floats inside the hero section */
+  bottom: 100px;         /* 100px from bottom of hero */
+  right: 40px;           /* 40px from right edge */
+  z-index: 10;           /* on top of everything including the 3D canvas */
+  background: #111;      /* black background */
+  color: #fff;           /* white text */
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  padding: 14px 28px;    /* comfortable click area */
+  border-radius: 999px;  /* pill shape (very large radius = oval) */
+  text-decoration: none; /* removes underline from link */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15); /* soft shadow below button */
+  transition: background-color 0.2s, transform 0.2s; /* smooth hover effect */
+}
+
+/* When mouse hovers over the menu button */
+.hero-menu-btn:hover {
+  background: #333;              /* slightly lighter black */
+  transform: translateY(-4px);   /* lifts button up by 4px */
+}
+
+/* ── BOUNCING SCROLL ARROW (centre bottom of hero) ── */
+.scroll-arrow {
+  position: absolute;            /* floats inside hero */
+  bottom: 60px;                  /* 60px from bottom */
+  left: 50%;                     /* start at horizontal centre */
+  transform: translateX(-50%);   /* shift left by half its width = perfect centre */
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  animation: arrow-bounce 1.6s ease-in-out infinite; /* repeating bounce animation */
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+/* The SVG arrow icon inside the scroll arrow */
+.scroll-arrow svg {
+  width: 40px;
+  height: 40px;
+  stroke: #111;        /* line colour */
+  stroke-width: 2.5;   /* line thickness */
+  fill: none;          /* no fill inside the arrow shape */
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.18)); /* shadow under arrow */
+}
+
+/* The bounce animation: goes down then comes back up repeatedly */
+@keyframes arrow-bounce {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);    /* starting position */
+    opacity: 0.85;
+  }
+  50% {
+    transform: translateX(-50%) translateY(10px); /* moved 10px downward */
+    opacity: 1;
+  }
+}
+
+/* ── SCROLLING TICKER BAR (fixed at bottom of screen) ── */
+.ticker {
+  position: fixed;       /* stays at the bottom even when you scroll */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff; /* white background */
+  padding: 18px 0;
+  overflow: hidden;       /* hides text that goes outside the bar */
+  z-index: 100;           /* always on top */
+}
+
+/* The moving inner container (like a conveyor belt) */
+.ticker-track {
+  display: flex;                              /* side-by-side text segments */
+  animation: ticker-scroll 38s linear infinite; /* scroll continuously */
+}
+
+/* Each repeated chunk of text in the ticker */
+.ticker-seg {
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  font-weight: bold;
+  color: #111;
+  white-space: nowrap;   /* prevents text from breaking to next line */
+  padding-right: 80px;   /* gap before the next segment repeats */
+}
+
+/* The scrolling animation: moves text from right to left */
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }     /* start at original position */
+  to   { transform: translateX(-50%); }  /* move left by half — seamless loop */
+}
+
+/* ── RESPONSIVE DESIGN (Syllabus: Media Queries) ── */
+@media (max-width: 768px) {
+  /* Move title UP so it sits nicely below the navbar */
+  .hero-title {
+    font-size: 70px;
+    margin-top: 40px; 
+    z-index: 10; /* Put the text ON TOP just in case it overlaps the cup */
+  }
+  
+  .hero-sub {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    max-width: 90%;
+    text-align: center;
+    margin: 10px auto 0;
+    z-index: 10;
+  }
+  
+  /* Push the 3D canvas DOWN into the bottom half of the screen */
+  #canvas3d {
+    width: 100vw;
+    height: 60vh;
+    top: auto;          /* Remove top anchoring */
+    bottom: 90px;       /* Anchor it above the ticker and menu button */
+  }
+  
+  /* Reposition the menu button below the cup */
+  .hero-menu-btn {
+    bottom: 30px; /* pushed way down below the cup */
+    right: 50%;
+    transform: translateX(50%); /* perfectly center it on mobile */
+  }
+  
+  /* Ensure hover transform plays nice with centered transform */
+  .hero-menu-btn:hover {
+    transform: translateX(50%) translateY(-4px);
+  }
+  
+  /* Move arrow up slightly, hide it if it's too cluttered */
+  .scroll-arrow {
+    display: none; /* Hide the bouncing arrow on mobile to reduce clutter */
+  }
+}

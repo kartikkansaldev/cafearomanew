@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Café Aroma — Sensational Coffees Roasted in Troy, NY</title>
+
+  <!-- Google Fonts: load Yellowtail (brush script) and Space Mono (typewriter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Yellowtail&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!--
+    CSS FILES — one file per section (easier to find and edit!)
+    Each file ONLY contains styles for its own section.
+  -->
+  <link rel="stylesheet" href="css/navbar.css" />      <!-- Navigation bar -->
+  <link rel="stylesheet" href="css/hero.css" />        <!-- Hero + Ticker -->
+  <link rel="stylesheet" href="css/about.css" />       <!-- About Us section -->
+  <link rel="stylesheet" href="css/locations.css" />   <!-- Locations section -->
+  <link rel="stylesheet" href="css/reviews.css" />     <!-- Reviews section -->
+  <link rel="stylesheet" href="css/footer.css" />      <!-- Footer -->
+</head>
+
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a class="pill mobile-home-btn" href="index.html">H O M E</a>
+    <div class="nav-center" id="mobile-menu">
+      <a class="pill hamburger-only" href="index.html">H O M E</a>
+      <a class="pill" href="menu.html">M E N U</a>
+      <a class="pill" href="rewards.html">R E W A R D S</a>
+      <a class="pill" href="#locations">L O C A T I O N</a>
+      <a class="pill hamburger-only" href="cart.html">C A R T</a>
+    </div>
+    <a class="pill desktop-cart" href="cart.html">C A R T</a>
+    <button class="hamburger-btn" onclick="document.getElementById('mobile-menu').classList.toggle('menu-open')">☰</button>
+  </nav>
+
+  <!-- MIDDLE SECTION (3D Cup & Big Text) -->
+  <main class="hero">
+    <!-- The 3D Scene loads into this canvas -->
+    <canvas id="canvas3d"></canvas>
+
+    <!-- The huge text sitting behind the cup -->
+    <h1 class="hero-title">
+      <span class="t-line">Café</span>
+      <span class="t-line">Aroma</span>
+    </h1>
+    <p class="hero-sub">
+      Sensational Coffees Roasted Fresh Daily
+    </p>
+
+    <!-- Bouncing scroll-down arrow -->
+    <div class="scroll-arrow">
+      <svg viewBox="0 0 24 24">
+        <polyline points="6 9 12 15 18 9" />
+      </svg>
+    </div>
+
+    <!-- Small Corner Menu Button -->
+    <a href="menu.html" class="hero-menu-btn">M E N U</a>
+  </main>
+
+  <!-- SCROLLING BAR AT BOTTOM -->
+  <div class="ticker">
+    <div class="ticker-track">
+      <span class="ticker-seg">
+        🍒 PERFECTLY RIPE COFFEE CHERRIES ARE PLUCKED AND PLACED IN A BASKET 🧺 THE SEEDS INSIDE ARE FERMENTED AND DRIED
+        ☀️ THEN THEY TURN INTO WHAT WE CALL GREEN COFFEE 🌿 WE APPLY HEAT, AND THE MAGIC HAPPENS • YOUR HANDS AND YOU
+        BREW A MINOR MIRACLE ☕ A SEED IS PLANTED IN JUST THE RIGHT SPOT
+      </span>
+      <span class="ticker-seg">
+        🍒 PERFECTLY RIPE COFFEE CHERRIES ARE PLUCKED AND PLACED IN A BASKET 🧺 THE SEEDS INSIDE ARE FERMENTED AND DRIED
+        ☀️ THEN THEY TURN INTO WHAT WE CALL GREEN COFFEE 🌿 WE APPLY HEAT, AND THE MAGIC HAPPENS • YOUR HANDS AND YOU
+        BREW A MINOR MIRACLE ☕ A SEED IS PLANTED IN JUST THE RIGHT SPOT
+      </span>
+    </div>
+  </div>
+
+  <!-- ABOUT SECTION -->
+  <section class="about" id="about">
+    <div class="about-text">
+      <p>A collective of speciality coffee shops with a focus on quality and simplicity. We serve considered cups that
+        invite pause and perspective.</p>
+      <a class="pill-light" href="#">A B O U T &nbsp; U S</a>
+    </div>
+    <div class="about-img">
+      <div class="about-img-wrap">
+        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1000&q=85&fit=crop"
+          alt="Café Aroma interior — cozy wooden seating with a latte" />
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATIONS SECTION -->
+  <section class="locations" id="locations">
+    <div class="locations-photos">
+      <div class="loc-img-wrap">
+        <img class="loc-photo" src="loc1.jpg" alt="Coffee shop interior" />
+        <div class="loc-overlay">SECTOR 17</div>
+      </div>
+      <div class="loc-img-wrap">
+        <img class="loc-photo" src="loc2.jpg" alt="Coffee pour" />
+        <div class="loc-overlay">SECTOR 35</div>
+      </div>
+      <div class="loc-img-wrap">
+        <img class="loc-photo" src="loc3.jpg" alt="Barista working" />
+        <div class="loc-overlay">ELANTE MALL</div>
+      </div>
+      <div class="loc-img-wrap">
+        <img class="loc-photo" src="loc4.jpg" alt="Cafe atmosphere" />
+        <div class="loc-overlay">SUKHNA LAKE</div>
+      </div>
+      <div class="loc-img-wrap">
+        <img class="loc-photo" src="loc5.jpg" alt="Coffee cup" />
+        <div class="loc-overlay">SECTOR 8</div>
+      </div>
+    </div>
+    <div class="locations-bottom">
+      <h2 class="loc-title">LOCATIONS</h2>
+      <div class="loc-pills">
+        <a href="#" class="loc-pill">SECTOR 17</a>
+        <a href="#" class="loc-pill">SECTOR 35</a>
+        <a href="#" class="loc-pill">ELANTE MALL</a>
+        <a href="#" class="loc-pill">SUKHNA LAKE</a>
+        <a href="#" class="loc-pill">SECTOR 8</a>
+      </div>
+      <a href="#" class="loc-visit">VISIT US</a>
+    </div>
+  </section>
+
+  <!-- REVIEWS SECTION -->
+  <section class="reviews" id="reviews">
+    <div class="reviews-header">
+      <h2 class="reviews-title">What they say</h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"The best cup of coffee in Chandigarh, hands down. The atmosphere is incredible and the beans are roasted to perfection. A true oasis in the city."</p>
+        <div class="review-author">
+          <div class="author-avatar">A</div>
+          <div class="author-info">
+            <span class="author-name">ARJUN K.</span>
+            <span class="author-title">Local Guide</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Café Aroma never fails to impress. A perfect spot to invite pause and perspective on a busy weekday. Highly recommend the pour over."</p>
+        <div class="review-author">
+          <div class="author-avatar">M</div>
+          <div class="author-info">
+            <span class="author-name">MEERA S.</span>
+            <span class="author-title">Coffee Enthusiast</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Incredible aesthetic and even better coffee. The barista team really knows what they are doing. This is my new daily morning stop."</p>
+        <div class="review-author">
+          <div class="author-avatar">R</div>
+          <div class="author-info">
+            <span class="author-name">ROHAN M.</span>
+            <span class="author-title">Regular Customer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- 6. JAVASCRIPT (Spline 3D Integration) -->
+  <script type="module">
+    import { Application } from 'https://esm.sh/@splinetool/runtime';
+
+    // 1. Find the canvas element in the HTML above
+    const canvas = document.getElementById('canvas3d');
+
+    // 2. Start the Spline application on that canvas
+    const spline = new Application(canvas);
+
+    // 3. Load your specific 3D scene from Spline's servers
+    spline.load('https://prod.spline.design/Mn5Zs4-z9VoUc9tt/scene.splinecode')
+      .then(() => {
+        console.log('Spline 3D Scene loaded!');
+      })
+      .catch((err) => {
+        console.error('Failed to load Spline scene:', err);
+      });
+  </script>
+
+
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+
+    <!-- Top row: LOCATION | Brand + Social | CONTACT -->
+    <div class="footer-top">
+
+      <!-- Left: Location -->
+      <div class="footer-col">
+        <span class="footer-label">L O C A T I O N</span>
+        <div class="footer-oval">
+          <p class="footer-text">SECTOR 17-C
+CHANDIGARH, 160017
+INDIA</p>
+        </div>
+      </div>
+
+      <!-- Center: Logo -->
+      <div class="footer-col-center">
+        <span class="footer-label">C A F &Eacute; &nbsp; A R O M A</span>
+        <span class="footer-social">@CAFEAROMA.CHD</span>
+      </div>
+
+      <!-- Right: Contact -->
+      <div class="footer-col" style="align-items: flex-end;">
+        <span class="footer-label">C O N T A C T</span>
+        <div class="footer-oval">
+          <p class="footer-text">GENERAL INQUIRIES:
+HELLO@CAFEAROMA.IN
+
+WHOLESALE INQUIRIES:
+WHOLESALE@CAFEAROMA.IN</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Mid row: About Us | Copyright | Colophon -->
+    <div class="footer-mid">
+      <div class="footer-mid-col">
+        <span class="footer-label">A B O U T &nbsp; U S</span>
+        <p class="footer-text" style="text-align:left;">WHO WE ARE AND
+WHAT WE DO</p>
+      </div>
+      <div class="footer-mid-col center">
+        <span class="footer-label">C O P Y R I G H T</span>
+        <p class="footer-text">&copy; 2026 CAF&Eacute; AROMA, LLC</p>
+      </div>
+      <div class="footer-mid-col right">
+        <span class="footer-label">C O L O P H O N</span>
+        <p class="footer-text">SITE: YOUR STUDIO
+CODE: YOUR TEAM</p>
+      </div>
+    </div>
+
+    <!-- Big brand name -->
+    <div class="footer-big-name">Caf&eacute; Aroma</div>
+
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <div class="footer-bottom-links">
+        <a href="#" class="footer-bottom-link">T E R M S &nbsp; &amp; &nbsp; C O N D I T I O N S</a>
+        <a href="#" class="footer-bottom-link">P R I V A C Y &nbsp; P O L I C Y</a>
+      </div>
+    </div>
+
+  </footer>
+
+</body>
+
+</html>
