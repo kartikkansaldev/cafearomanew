@@ -1,81 +1,93 @@
-/* =====================================================
-   tabs.js — JavaScript Tab Switching
-   Syllabus Topics: Variables & Const (L1-4), 
-                    DOM Selectors (L23-26), 
-                    Event Delegation/Handling (L27-30),
-                    Functions & Arrow Syntax (L13-16)
-   ===================================================== */
+// ==========================================
+// VIVA PREP: WHAT IS querySelectorAll?
+// document.querySelectorAll searches the whole webpage and grabs ALL HTML 
+// elements that match a class name (like '.tab-btn'). It puts them inside a list.
+// ==========================================
 
-// 1. Select all the tab buttons on the page using querySelectorAll (L23-26)
-// This will grab both the Menu tabs (M E N U, F E A T U R E D) and Rewards tabs (25★, 50★)
-const tabButtons = document.querySelectorAll('.tab-btn, .star-tab');
+// 1. Grab all the tab buttons on the page (both Menu tabs and Rewards tabs)
+let tabButtons = document.querySelectorAll('.tab-btn, .star-tab');
 
-// 2. Loop through every single button (Syllabus L5-8)
-// We use forEach to attach an Event Listener to each one.
-tabButtons.forEach(button => {
+// ==========================================
+// VIVA PREP: WHAT IS A FOR LOOP?
+// A "for loop" repeats a block of code a certain number of times. 
+// Here, we loop through our list of buttons. 'i' starts at 0, and goes up 
+// until it reaches the total number of buttons (tabButtons.length).
+// ==========================================
+
+for (let i = 0; i < tabButtons.length; i++) {
+  let button = tabButtons[i]; // Get one button from the list at a time
   
-  // 3. Add an Event Listener (L27-30)
-  // Listen for the 'click' event
-  button.addEventListener('click', () => {
+  // 3. Add a "click" event listener to this specific button
+  button.addEventListener('click', function() {
     
-    // Step A: Find out which group of tabs this button belongs to.
-    // If it's a .tab-btn, its siblings are other .tab-btn inside .sub-nav.
-    // We can look at the parent container to scope our changes.
-    const parentContainer = button.parentElement;
+    // Step A: Find the parent box that holds this group of tabs
+    // We do this so we only change tabs in the same menu, not the whole page.
+    let parentContainer = button.parentElement;
     
-    // Step B: Remove the "active" class from ALL buttons inside this specific group
-    // This turns off the highlighting for the old tab
-    const siblings = parentContainer.querySelectorAll('.tab-btn, .star-tab');
-    siblings.forEach(sib => sib.classList.remove('active'));
+    // Step B: Find all sibling tabs inside that parent box
+    let siblings = parentContainer.querySelectorAll('.tab-btn, .star-tab');
     
-    // Step C: Add the "active" class to the EXACT button we just clicked (L23-26)
+    // Loop through all the siblings and remove the 'active' class
+    // This turns off the color for the old tab
+    for (let j = 0; j < siblings.length; j++) {
+      siblings[j].classList.remove('active');
+    }
+    
+    // Step C: Add the 'active' class to the exact button we just clicked!
+    // classList allows Javascript to add or remove CSS classes from HTML.
     button.classList.add('active');
 
-    // Step D: Change the background color if this tab requested it (Menu Page logic)
-    // We read the custom HTML attribute data-color using dataset (L23-26)
+    // Step D: Change the background color of the whole page (if the tab has a custom color)
+    // We read the 'data-color' attribute we wrote in our HTML
     if (button.dataset.color) {
       document.body.style.backgroundColor = button.dataset.color;
       updateBodyTheme(button.dataset.color);
-      // Dispatch scroll event so navbar text color updates to match new background color
+      // We manually trigger a scroll event so the navbar updates its text color
       window.dispatchEvent(new Event('scroll'));
     }
 
-    // Step E: Switch the panels!
-    // Every button has a data-target attribute (e.g., data-target="panel-menu")
-    const targetPanelId = button.dataset.target;
-    
-    // Find the container holding the panels (menu-layout or star-content-container)
-    // We go up the DOM tree and find the relevant wrapper to avoid mixing menu and rewards panels.
-    // A simple way is to just find ALL panels that are siblings of the target panel,
-    // but the safest way is to find the target panel by ID, get its parent, and hide all its children.
-    const targetPanel = document.getElementById(targetPanelId);
+    // Step E: Hide the old panel and show the new panel!
+    // Find out which panel this button is supposed to open
+    let targetPanelId = button.dataset.target;
+    let targetPanel = document.getElementById(targetPanelId);
     
     if (targetPanel) {
-      const panelContainer = targetPanel.parentElement;
+      let panelContainer = targetPanel.parentElement;
       
-      // Hide all panels inside this specific container
-      const allPanelsInGroup = panelContainer.querySelectorAll('.tab-panel, .star-panel');
-      allPanelsInGroup.forEach(panel => panel.classList.remove('active'));
+      // Find all panels inside this section
+      let allPanelsInGroup = panelContainer.querySelectorAll('.tab-panel, .star-panel');
       
-      // Show the one we want
+      // Loop through all panels and hide them by removing the 'active' class
+      for (let k = 0; k < allPanelsInGroup.length; k++) {
+        allPanelsInGroup[k].classList.remove('active');
+      }
+      
+      // Finally, show the panel we want by adding the 'active' class
       targetPanel.classList.add('active');
     }
   });
-});
+}
 
-// Helper function to update theme class based on background brightness
+// ==========================================
+// VIVA PREP: HELPER FUNCTION
+// This function checks if a color is light or dark, and adds a CSS class 
+// to the body so text colors stay readable (white text on dark backgrounds, etc).
+// ==========================================
 function updateBodyTheme(colorHex) {
-  if (!colorHex || colorHex[0] !== '#') {
+  if (colorHex === undefined || colorHex[0] !== '#') {
     document.body.classList.add('dark-bg');
     document.body.classList.remove('light-bg');
     return;
   }
-  const hex = colorHex.substring(1);
-  const r = parseInt(hex.substr(0, 2), 16);
-  const g = parseInt(hex.substr(2, 2), 16);
-  const b = parseInt(hex.substr(4, 2), 16);
-  const brightness = (r * 299 + g * 587 + b * 114) / 1000;
   
+  // Basic math to figure out brightness
+  let hex = colorHex.substring(1);
+  let r = parseInt(hex.substr(0, 2), 16);
+  let g = parseInt(hex.substr(2, 2), 16);
+  let b = parseInt(hex.substr(4, 2), 16);
+  let brightness = (r * 299 + g * 587 + b * 114) / 1000;
+  
+  // If brightness is low, it's dark! If high, it's light!
   if (brightness < 150) {
     document.body.classList.add('dark-bg');
     document.body.classList.remove('light-bg');
@@ -85,31 +97,31 @@ function updateBodyTheme(colorHex) {
   }
 }
 
-// 4. Initialize Background Color on Load
-// Find the currently active tab (if any) and set the body color to match its dataset.color
-const initialActiveTab = document.querySelector('.tab-btn.active, .star-tab.active');
+// 4. When the page first loads, set the correct background color
+let initialActiveTab = document.querySelector('.tab-btn.active, .star-tab.active');
 if (initialActiveTab && initialActiveTab.dataset.color) {
   document.body.style.backgroundColor = initialActiveTab.dataset.color;
   updateBodyTheme(initialActiveTab.dataset.color);
 }
 
-// 5. Smart Sticky Navbar (Hide on scroll down, show on scroll up)
+// 5. Smart Sticky Navbar (Hide when scrolling down, show when scrolling up)
 let lastScrollY = window.scrollY;
-const mainNav = document.querySelector('nav');
-const subNav = document.querySelector('.sub-nav');
+let mainNav = document.querySelector('nav');
+let subNav = document.querySelector('.sub-nav');
 
-window.addEventListener('scroll', () => {
-  const currentScrollY = window.scrollY;
+window.addEventListener('scroll', function() {
+  let currentScrollY = window.scrollY;
   
-  // If we scroll down more than 50px, hide the navbar
+  // If we scrolled down more than 50px, hide the navbar
   if (currentScrollY > lastScrollY && currentScrollY > 50) {
-    if (mainNav) mainNav.classList.add('nav-hidden');
-    if (subNav) subNav.classList.add('nav-hidden');
+    if (mainNav) { mainNav.classList.add('nav-hidden'); }
+    if (subNav) { subNav.classList.add('nav-hidden'); }
   } else {
-    // If we scroll up, show the navbar
-    if (mainNav) mainNav.classList.remove('nav-hidden');
-    if (subNav) subNav.classList.remove('nav-hidden');
+    // If we scroll up, show the navbar again
+    if (mainNav) { mainNav.classList.remove('nav-hidden'); }
+    if (subNav) { subNav.classList.remove('nav-hidden'); }
   }
   
+  // Update our last known scroll position
   lastScrollY = currentScrollY;
 });

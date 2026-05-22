@@ -1,13 +1,13 @@
-/* =====================================================
-   menu-data.js — Dynamic Menu Loading (JSON/Arrays)
-   Syllabus Topics: Variables & Const (L1-4), Arrays/Objects (L5-8),
-                    JSON concepts (L19-22), map() function (L17-18),
-                    DOM Creation & Appending (L23-26)
-   ===================================================== */
+// ==========================================
+// VIVA PREP: WHAT IS AN ARRAY OF OBJECTS?
+// An Array is a list (like a shopping list). 
+// An Object is a collection of related data (key-value pairs) about one thing.
+// Here, we have an array called 'coffeeData', and inside it are multiple 
+// objects. Each object represents one type of coffee drink!
+// ==========================================
 
-// 1. Array of Objects (Syllabus L5-8)
-// We store our menu data exactly like we would if we fetched it from a real JSON API!
-const coffeeData = [
+// 1. We store our menu data exactly like we would if we fetched it from a real database!
+let coffeeData = [
   {
     id: 'hot-1',
     category: 'hot',
@@ -111,24 +111,53 @@ const coffeeData = [
   }
 ];
 
-// 2. DOM Selection (Syllabus L23-26)
-// Find the empty containers in menu.html where we will inject the cards
-const hotGrid = document.getElementById('hot-coffee-grid');
-const coldGrid = document.getElementById('cold-coffee-grid');
+// ==========================================
+// VIVA PREP: DOM SELECTION
+// We use getElementById to find the empty <div> containers in our HTML file.
+// We will use JavaScript to put the coffee cards inside these empty boxes!
+// ==========================================
+let hotGrid = document.getElementById('hot-coffee-grid');
+let coldGrid = document.getElementById('cold-coffee-grid');
 
-// 3. Higher-Order Function: Filter (Syllabus L17-18)
-const hotCoffees = coffeeData.filter(drink => drink.category === 'hot');
-const coldCoffees = coffeeData.filter(drink => drink.category === 'cold');
-
-// 4. Create Node Function (Syllabus L23-26)
-// This function takes a single drink object and returns a piece of HTML
+// ==========================================
+// VIVA PREP: HOW TO BUILD HTML WITH JAVASCRIPT
+// We created a function that takes ONE drink object from our array,
+// and returns a big string of HTML code for that specific drink.
+// ==========================================
 function createCardHTML(drink) {
-  const currentFavorites = JSON.parse(localStorage.getItem('cafeFavorites')) || [];
-  const isFav = currentFavorites.includes(drink.id);
-  const heartText = isFav ? '♥' : '♡';
-  const heartColor = isFav ? '#ff4b4b' : '#fff';
+  // We check local storage to see if the user previously favorited this drink
+  let currentFavoritesJSON = localStorage.getItem('cafeFavorites');
+  let currentFavorites = [];
+  
+  if (currentFavoritesJSON !== null) {
+    currentFavorites = JSON.parse(currentFavoritesJSON);
+  }
+  
+  // We use a simple loop to check if the drink ID is inside our favorites list
+  let isFav = false;
+  for (let i = 0; i < currentFavorites.length; i++) {
+    if (currentFavorites[i] === drink.id) {
+      isFav = true;
+    }
+  }
+  
+  // If it's a favorite, make the heart red and filled! If not, make it white and empty.
+  let heartText;
+  let heartColor;
+  
+  if (isFav === true) {
+    heartText = '♥';
+    heartColor = '#ff4b4b';
+  } else {
+    heartText = '♡';
+    heartColor = '#fff';
+  }
 
-  // We use Template Literals (``) from ES6 to easily inject variables into HTML strings
+  // ==========================================
+  // VIVA PREP: TEMPLATE LITERALS
+  // By using backticks ( ` ` ) instead of quotes ( ' ' ), Javascript lets us 
+  // inject variables directly into the string using ${} syntax!
+  // ==========================================
   return `
     <div class="featured-card" data-id="${drink.id}">
       <!-- HEART ICON FOR FAVORITES (We will select this in favorites.js) -->
@@ -152,10 +181,33 @@ function createCardHTML(drink) {
   `;
 }
 
-// 5. Render to the DOM (Syllabus L17-18 & L23-26)
-// map() goes through the array, generates HTML for each, and join('') merges them into one big string.
-// innerHTML writes that string directly into the webpage!
-if (hotGrid && coldGrid) {
-  hotGrid.innerHTML = hotCoffees.map(createCardHTML).join('');
-  coldGrid.innerHTML = coldCoffees.map(createCardHTML).join('');
+// ==========================================
+// VIVA PREP: WHAT IS innerHTML?
+// innerHTML is a DOM property that lets us completely change the HTML inside an element.
+// Here we loop through our coffee array, build HTML for each hot/cold drink, 
+// and shove it all into the webpage!
+// ==========================================
+if (hotGrid !== null && coldGrid !== null) {
+  
+  let hotHTML = "";
+  let coldHTML = "";
+  
+  // We use a simple FOR loop to go through every single coffee in our array
+  for (let i = 0; i < coffeeData.length; i++) {
+    let drink = coffeeData[i];
+    
+    // If it's a hot coffee, add its HTML to our hotHTML string
+    if (drink.category === 'hot') {
+      hotHTML = hotHTML + createCardHTML(drink);
+    }
+    
+    // If it's a cold coffee, add its HTML to our coldHTML string
+    if (drink.category === 'cold') {
+      coldHTML = coldHTML + createCardHTML(drink);
+    }
+  }
+  
+  // Finally, put the massive strings of HTML directly into the webpage!
+  hotGrid.innerHTML = hotHTML;
+  coldGrid.innerHTML = coldHTML;
 }
