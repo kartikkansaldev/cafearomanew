@@ -138,26 +138,13 @@ function initChatbot() {
             if (response.ok) {
                 const data = await response.json();
                 botReply = data.choices[0].message.content;
-            } else if (LOCAL_TESTING_API_KEY) {
-                // Fallback to direct API call for local testing if key is provided
-                const directResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${LOCAL_TESTING_API_KEY}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        model: 'llama3-8b-8192',
-                        messages: [
-                            { role: 'system', content: 'You are a friendly barista at Café Aroma in Chandigarh. You give short, punchy coffee recommendations based on user interests. Limit your response to 2-3 sentences.' },
-                            { role: 'user', content: text }
-                        ]
-                    })
-                });
-                const data = await directResponse.json();
-                botReply = data.choices[0].message.content;
             } else {
-                botReply = "Sorry, I can't connect right now. (API Key missing or Serverless Function failed)";
+                try {
+                    const errorData = await response.json();
+                    botReply = "API Error: " + (errorData.error || "Something went wrong.");
+                } catch(e) {
+                    botReply = "Sorry, I can't connect right now. (Serverless function failed with status " + response.status + ")";
+                }
             }
             
             // Remove loading
@@ -169,7 +156,8 @@ function initChatbot() {
         } catch (error) {
             const loader = document.getElementById(loadingId);
             if(loader) loader.remove();
-            addMessage("Oops! There was a network error.", false);
+            console.error("Chatbot Error:", error);
+            addMessage("Oops! " + error.message, false);
         }
     }
 
